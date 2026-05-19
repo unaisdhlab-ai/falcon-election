@@ -8,7 +8,7 @@ const root = path.resolve(__dirname);
 const dataFile = path.join(root, "election-data.json");
 const port = Number(process.env.PORT || 8094);
 const host = process.env.HOST || "0.0.0.0";
-
+let cachedData = null;
 const fallbackImage =
   "data:image/svg+xml;charset=UTF-8," +
   encodeURIComponent(`
@@ -35,26 +35,23 @@ function defaultData() {
 }
 
 function readData() {
-  if (!fs.existsSync(dataFile)) {
-    const starter = defaultData();
-    writeData(starter);
-    return starter;
-  }
-
+  if (cachedData) return cachedData;
+  
   try {
-    const parsed = JSON.parse(fs.readFileSync(dataFile, "utf8"));
-    return {
-      pollOpen: Boolean(parsed.pollOpen),
-      candidates: Array.isArray(parsed.candidates) ? parsed.candidates : []
-    };
+    const content = fs.readFileSync(dataFile, "utf8");
+    cachedData = JSON.parse(content);
+    return cachedData;
   } catch {
     const starter = defaultData();
+    cachedData = starter;
     writeData(starter);
     return starter;
   }
 }
 
 function writeData(data) {
+  cachedData = data;
+  
   fs.writeFile(dataFile, JSON.stringify(data, null, 2), "utf8", (err) => {
     if (err) console.error("Background data save failed:", err);
   });
