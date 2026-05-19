@@ -147,6 +147,9 @@ function updatePollBadges(isOpen) {
   });
 }
 
+/* ==========================================================================
+   PUBLIC PAGE APPLICATION LOGIC
+   ========================================================================== */
 async function initPublicPage() {
   const voteForm = document.getElementById("voteForm");
   if (!voteForm) return;
@@ -361,7 +364,7 @@ function showSuccessModal() {
 }
 
 /* ==========================================================================
-   👑 TEACHER VIEW: LUXURY REAL-TIME RANKED LEADBOARDS GRID ENGINE
+   👑 TEACHER VIEW: LUXURY FULL SCREEN REAL-TIME RANKED LEADBOARDS GRID
    ========================================================================== */
 function renderAdminPage(data) {
   const container = document.getElementById("candidateTable");
@@ -370,7 +373,7 @@ function renderAdminPage(data) {
   container.innerHTML = "";
 
   if (!data.candidates.length) {
-    container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 3rem; background: #f8fafc; border-radius: 12px; border: 2px dashed #cbd5e1; font-weight: 500;">No candidates have been registered yet.</div>';
+    container.innerHTML = '<div style="text-align: center; color: #64748b; padding: 4rem 2rem; background: #f8fafc; border-radius: 16px; border: 2px dashed #cbd5e1; font-weight: 600; font-size: 1.1rem; width: 100%; box-sizing: border-box;">No candidates have been registered yet.</div>';
     return;
   }
 
@@ -385,19 +388,19 @@ function renderAdminPage(data) {
     const maxVotes = Number(candidatesInPosition[0].votes || 0);
 
     const positionCard = document.createElement("div");
-    positionCard.style = "background: #ffffff; border-radius: 20px; padding: 2rem; margin-bottom: 2.5rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.03), 0 8px 10px -6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0;";
+    positionCard.style = "background: #ffffff; border-radius: 20px; padding: 2.5rem; margin-bottom: 2.5rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.03), 0 8px 10px -6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; width: 100%; box-sizing: border-box;";
 
     let htmlContent = `
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; padding-bottom: 1rem; border-bottom: 2px solid #f1f5f9;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid #f1f5f9; width: 100%;">
         <div>
-          <h3 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin: 0; letter-spacing: -0.02em;">${escapeHtml(positionName)}</h3>
-          <p style="color: #64748b; font-size: 0.85rem; margin: 4px 0 0 0; font-weight: 500;">Automatically ranked by real-time vote outcomes</p>
+          <h3 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin: 0; letter-spacing: -0.02em;">${escapeHtml(positionName)}</h3>
+          <p style="color: #64748b; font-size: 0.9rem; margin: 4px 0 0 0; font-weight: 500;">Automatically ranked by real-time vote outcomes</p>
         </div>
-        <span style="font-size: 0.8rem; background: #e0e7ff; color: #4338ca; padding: 6px 14px; border-radius: 9999px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+        <span style="font-size: 0.85rem; background: #e0e7ff; color: #4338ca; padding: 8px 18px; border-radius: 9999px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
           ${candidatesInPosition.length} Contestants
         </span>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; width: 100%;">
     `;
 
     candidatesInPosition.forEach((candidate, index) => {
@@ -411,9 +414,9 @@ function renderAdminPage(data) {
       if (rank === 3) badgeBg = "#b45309"; // Bronze status
 
       htmlContent += `
-        <div style="background: ${isLeading ? '#f8fafc' : '#ffffff'}; border: 2px solid ${isLeading ? '#3b82f6' : '#e2e8f0'}; border-radius: 16px; padding: 1.5rem; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: ${isLeading ? '0 4px 20px -2px rgba(59,130,246,0.08)' : 'none'}; transition: all 0.2s ease-in-out;">
+        <div style="background: ${isLeading ? '#f8fafc' : '#ffffff'}; border: 2px solid ${isLeading ? '#3b82f6' : '#e2e8f0'}; border-radius: 16px; padding: 1.75rem 1.5rem; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: ${isLeading ? '0 4px 20px -2px rgba(59,130,246,0.08)' : 'none'}; transition: all 0.2s ease-in-out;">
           
-          <div style="position: absolute; top: 12px; left: 12px; width: 32px; height: 32px; background: ${badgeBg}; color: white; font-weight: 800; font-size: 0.9rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+          <div style="position: absolute; top: 14px; left: 14px; width: 34px; height: 34px; background: ${badgeBg}; color: white; font-weight: 800; font-size: 0.95rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
             ${rank}
           </div>
 
@@ -423,21 +426,21 @@ function renderAdminPage(data) {
             </div>
           ` : ''}
 
-          <div style="width: 110px; height: 110px; border-radius: 50%; overflow: hidden; margin-top: 8px; margin-bottom: 1rem; border: 4px solid ${isLeading ? '#3b82f6' : '#f1f5f9'}; box-shadow: 0 4px 10px rgba(0,0,0,0.02); background: #f8fafc; display: flex; align-items: center; justify-content: center;">
+          <div style="width: 115px; height: 115px; border-radius: 50%; overflow: hidden; margin-top: 8px; margin-bottom: 1.25rem; border: 4px solid ${isLeading ? '#3b82f6' : '#f1f5f9'}; box-shadow: 0 4px 10px rgba(0,0,0,0.03); background: #f8fafc; display: flex; align-items: center; justify-content: center;">
             <img src="${candidateImage(candidate)}" alt="${escapeHtml(candidate.name)} photo" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
 
-          <h4 style="font-size: 1.25rem; font-weight: 700; color: #1e293b; margin: 0 0 4px 0; letter-spacing: -0.01em;">${escapeHtml(candidate.name)}</h4>
-          <p style="font-size: 0.85rem; color: #64748b; font-weight: 600; margin: 0 0 1.25rem 0;">Class ${escapeHtml(candidate.className || 'N/A')}</p>
+          <h4 style="font-size: 1.3rem; font-weight: 700; color: #1e293b; margin: 0 0 4px 0; letter-spacing: -0.01em;">${escapeHtml(candidate.name)}</h4>
+          <p style="font-size: 0.85rem; color: #64748b; font-weight: 600; margin: 0 0 1.5rem 0;">Class ${escapeHtml(candidate.className || 'N/A')}</p>
 
-          <div style="margin-top: auto; width: 100%; background: ${isLeading ? '#eff6ff' : '#f8fafc'}; border-radius: 12px; padding: 10px 0; border: 1px solid ${isLeading ? '#dbeafe' : '#f1f5f9'};">
+          <div style="margin-top: auto; width: 100%; background: ${isLeading ? '#eff6ff' : '#f8fafc'}; border-radius: 12px; padding: 12px 0; border: 1px solid ${isLeading ? '#dbeafe' : '#f1f5f9'};">
             <span style="font-size: 0.75rem; color: #64748b; display: block; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 2px;">Ballots Cast</span>
-            <span style="font-size: 2rem; font-weight: 900; color: ${isLeading ? '#2563eb' : '#0f172a'}; line-height: 1;">${voteCount}</span>
+            <span style="font-size: 2.25rem; font-weight: 900; color: ${isLeading ? '#2563eb' : '#0f172a'}; line-height: 1;">${voteCount}</span>
           </div>
 
-          <div style="display: flex; gap: 8px; margin-top: 12px; width: 100%; justify-content: center;">
-            <button type="button" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 6px; cursor: pointer; border: 1px solid #cbd5e1; background: #ffffff;" data-edit="${candidate.id}">Edit</button>
-            <button type="button" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 6px; cursor: pointer; border: 1px solid #fee2e2; background: #fff5f5; color: #991b1b;" data-delete="${candidate.id}">Delete</button>
+          <div style="display: flex; gap: 8px; margin-top: 14px; width: 100%; justify-content: center;">
+            <button type="button" style="padding: 5px 14px; font-size: 0.8rem; font-weight: 700; border-radius: 6px; cursor: pointer; border: 1px solid #cbd5e1; background: #ffffff; color: #1e293b;" data-edit="${candidate.id}">Edit</button>
+            <button type="button" style="padding: 5px 14px; font-size: 0.8rem; font-weight: 700; border-radius: 6px; cursor: pointer; border: 1px solid #fee2e2; background: #fff5f5; color: #991b1b;" data-delete="${candidate.id}">Delete</button>
           </div>
 
         </div>
@@ -449,7 +452,7 @@ function renderAdminPage(data) {
     container.appendChild(positionCard);
   });
 
-  // Attach button interactive listeners to the inline grid actions dynamically
+  // Attach dynamic layout interaction node events cleanly
   container.querySelectorAll("[data-edit]").forEach((button) => {
     button.addEventListener("click", () => editCandidate(button.dataset.edit));
   });
@@ -458,6 +461,9 @@ function renderAdminPage(data) {
   });
 }
 
+/* ==========================================================================
+   ADMIN SETTINGS APPLICATION MODULE
+   ========================================================================== */
 function initAdminPage() {
   const loginView = document.getElementById("loginView");
   if (!loginView) return;
@@ -617,6 +623,7 @@ function initAdminPage() {
     }
   });
 
+  // Automated Real-Time Background Thread Synchronization
   async function triggerAdminLiveUpdate() {
     const adminView = document.getElementById("adminView");
     if (!adminView || adminView.classList.contains("hidden")) return;
@@ -682,7 +689,7 @@ async function editCandidate(id) {
   const candidate = data.candidates.find((item) => item.id === id);
   if (!candidate) return;
   
-  // Instantly flip tabs to settings layout so the admin can fill fields
+  // Force click toggle to system settings panel tab layout view
   document.getElementById("tabShowManage").click();
   
   document.getElementById("candidateId").value = candidate.id;
@@ -779,7 +786,7 @@ function resultBar(candidate, total, index) {
         <span class="${index === 0 ? "leading" : ""}" style="width: ${barWidth}%"></span>
       </div>
       <div class="result-numbers">
-        <strong>${votes}</strong>
+        # <strong>${votes}</strong>
         <small>${candidatePercent}%</small>
       </div>
     </div>

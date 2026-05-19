@@ -42,6 +42,7 @@
       </section>
 
       <section id="adminView" class="hidden">
+        
         <div class="admin-header" style="margin-bottom: 1.5rem;">
           <div>
             <p class="eyebrow">Control Room</p>
@@ -60,24 +61,24 @@
           </button>
         </div>
 
-        <div id="resultsTabWrapper">
-          <section class="panel" style="background: #ffffff; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);">
-            <div class="section-heading" style="margin-bottom: 2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem;">
+        <div id="resultsTabWrapper" style="width: 100%; max-width: 100%;">
+          <section class="panel" style="background: #ffffff; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05); width: 100%; max-width: 98%; margin: 0 auto; box-sizing: border-box;">
+            <div class="section-heading" style="margin-bottom: 2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; width: 100%;">
               <div>
                 <p class="eyebrow" style="color: #6366f1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">Live Election Center</p>
-                <h2 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin: 4px 0 0 0;">Real-Time Standings</h2>
-                <p style="color: #64748b; margin-top: 6px; font-size: 0.95rem;">Displays current leaders dynamically with live profile cards.</p>
+                <h2 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin: 4px 0 0 0; letter-spacing: -0.02em;">Real-Time Standings</h2>
+                <p style="color: #64748b; margin-top: 6px; font-size: 0.95rem; font-weight: 500;">Displays current leaders dynamically with live profile podium cards.</p>
               </div>
               <div style="text-align: right;">
                 <span class="badge" style="background: #ef4444; color: white; padding: 6px 14px; border-radius: 9999px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);">Live Tallying Active</span>
               </div>
             </div>
             
-            <div id="candidateTable" class="admin-results-grid"></div>
+            <div id="candidateTable" style="width: 100%;"></div>
           </section>
         </div>
 
-        <div id="manageTabWrapper" style="display: none;">
+        <div id="manageTabWrapper" style="display: none; width: 100%;">
           <section class="toolbar">
             <div>
               <span id="adminPollBadge" class="badge">Poll status</span>
@@ -146,7 +147,7 @@
             <div id="positionResults" class="position-results"></div>
           </section>
 
-          <section class="panel" style="margin-top: 2rem; border-top: 3px solid #fee2e2; background: #fff5f5;">
+          <section class="panel" style="margin-top: 2rem; border-top: 3px solid #fee2e2; background: #fff5f5; border-radius: 16px;">
             <div class="section-heading">
               <div>
                 <p class="eyebrow" style="color: #ef4444;">Danger Zone</p>
