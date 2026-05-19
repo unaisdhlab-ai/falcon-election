@@ -518,9 +518,8 @@ function initAdminPage() {
       candidateFormStatus.textContent = "Candidate could not be saved. Please refresh and try again.";
     }
   });
-  // Automatically fetch and update admin counts live every 3 seconds
-  setInterval(async () => {
-    // Only fetch if the user is actively viewing the admin panel right now
+ // 1. Reusable function for lightning-fast dashboard updates
+  async function triggerAdminLiveUpdate() {
     const adminView = document.getElementById("adminView");
     if (!adminView || adminView.classList.contains("hidden")) return;
 
@@ -529,16 +528,27 @@ function initAdminPage() {
       if (!response.ok) return;
       const data = await response.json();
       
-      // Update the table on your screen with the fresh, real-time vote data
       if (typeof renderAdminPage === "function") {
         renderAdminPage(data);
       } else if (typeof loadAdminData === "function") {
-        loadAdminData(); // Fallback to your existing loader if named differently
+        loadAdminData();
       }
     } catch (err) {
-      console.error("Live auto-update cycle paused:", err);
+      console.error("Live update cycle paused:", err);
     }
-  }, 3000);
+  }
+
+  // 2. Keep the automatic background cycle running every 3 seconds
+  setInterval(triggerAdminLiveUpdate, 3000);
+
+  // 3. FORCE an instant UI update the split-second the Reset button is clicked
+  const resetBtn = document.getElementById("resetVotesButton");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      // Gives the server a brief 200ms window to clear, then updates UI instantly
+      setTimeout(triggerAdminLiveUpdate, 200);
+    });
+  }
 }
 
 function resizeImage(file) {
