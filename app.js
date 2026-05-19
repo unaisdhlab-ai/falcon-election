@@ -528,11 +528,8 @@ function initAdminPage() {
       if (!response.ok) return;
       const data = await response.json();
       
-      if (typeof renderAdminPage === "function") {
-        renderAdminPage(data);
-      } else if (typeof loadAdminData === "function") {
-        loadAdminData();
-      }
+      // This will call your brand new visual card rendering engine
+      renderAdminPage(data);
     } catch (err) {
       console.error("Live update cycle paused:", err);
     }
@@ -545,11 +542,19 @@ function initAdminPage() {
   const resetBtn = document.getElementById("resetVotesButton");
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
-      // Gives the server a brief 200ms window to clear, then updates UI instantly
       setTimeout(triggerAdminLiveUpdate, 200);
     });
   }
 }
+
+  // 3. FORCE an instant UI update the split-second the Reset button is clicked
+  const resetBtn = document.getElementById("resetVotesButton");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      // Gives the server a brief 200ms window to clear, then updates UI instantly
+      setTimeout(triggerAdminLiveUpdate, 200);
+    });
+  }
 
 function resizeImage(file) {
   return new Promise((resolve, reject) => {
