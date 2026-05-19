@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Falcon Election Admin</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">F</span>
+        <span>
+          <strong>Falcon Election</strong>
+          <small>Admin panel</small>
+        </span>
+      </a>
+      <nav>
+        <a href="index.html">Public poll</a>
+      </nav>
+    </header>
+
+    <main class="page-shell">
+      <section id="loginView" class="auth-panel">
+        <div>
+          <p class="eyebrow">Restricted Access</p>
+          <h1>Admin sign in</h1>
+          <p class="lede">Use the election admin account to manage candidates, voting status, and results.</p>
+        </div>
+        <form id="loginForm" class="form-grid" autocomplete="off">
+          <label>
+            Username
+            <input id="username" type="text" required>
+          </label>
+          <label>
+            Password
+            <input id="password" type="password" required>
+          </label>
+          <button type="submit">Sign in</button>
+          <p id="loginError" class="form-error" role="alert"></p>
+        </form>
+      </section>
+
+      <section id="adminView" class="hidden">
+        <div class="admin-header">
+          <div>
+            <p class="eyebrow">Control Room</p>
+            <h1>Election admin panel</h1>
+            <p class="lede">Add candidates, open or close the poll, and review live totals.</p>
+          </div>
+          <button id="logoutButton" class="ghost-button" type="button">Sign out</button>
+        </div>
+
+        <section class="toolbar">
+          <div>
+            <span id="adminPollBadge" class="badge">Poll status</span>
+            <strong id="adminPollText">Loading...</strong>
+          </div>
+          <div class="toolbar-actions">
+            <button id="openPollButton" type="button">Open poll</button>
+            <button id="closePollButton" class="danger-button" type="button">Close poll</button>
+          </div>
+        </section>
+
+        <section class="admin-grid">
+          <form id="candidateForm" class="panel form-grid">
+            <div>
+              <p class="eyebrow">Candidates</p>
+              <h2>Add or update candidate</h2>
+            </div>
+            <input id="candidateId" type="hidden">
+            <label>
+              Candidate name
+              <input id="candidateName" type="text" required>
+            </label>
+            <label>
+              Position
+              <input id="candidatePosition" type="text" placeholder="Head Boy, Sports Captain..." required>
+            </label>
+            <label>
+              Class
+              <input id="candidateClass" type="text" placeholder="10 A" required>
+            </label>
+            <label>
+              Candidate image
+              <input id="candidateImage" type="file" accept="image/*">
+            </label>
+            <div class="image-preview hidden" id="imagePreviewWrap">
+              <img id="imagePreview" alt="Candidate preview">
+            </div>
+            <p id="candidateFormStatus" class="form-status" role="status"></p>
+            <div class="button-row">
+              <button type="submit">Save candidate</button>
+              <button id="clearFormButton" class="ghost-button" type="button">Clear</button>
+            </div>
+          </form>
+
+          <section class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Live Results</p>
+                <h2>Vote summary</h2>
+              </div>
+              <strong id="totalVotes">0 votes</strong>
+            </div>
+            <div id="leaderList" class="leader-list"></div>
+            <canvas id="resultsChart" height="260" aria-label="Voting results graph"></canvas>
+          </section>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Position Results</p>
+              <h2>Separate results by position</h2>
+            </div>
+            <span class="selection-count">Votes, percentage, and difference</span>
+          </div>
+          <div id="positionResults" class="position-results"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Manage</p>
+              <h2>Candidate list</h2>
+            </div>
+            <button id="resetVotesButton" class="danger-button" type="button">Reset all votes</button>
+          </div>
+          <div id="candidateTable" class="candidate-table"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

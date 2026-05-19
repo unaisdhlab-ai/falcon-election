@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Falcon School Election</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">F</span>
+        <span>
+          <strong>Falcon Election</strong>
+          <small>Public voting</small>
+        </span>
+      </a>
+      <nav>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">School Election Poll</p>
+          <h1>Mark your vote</h1>
+          <p class="lede">Choose one candidate for each position. The public page updates when the admin makes changes and you refresh.</p>
+        </div>
+        <div class="status-panel" aria-live="polite">
+          <span id="pollStatusBadge" class="badge">Checking poll status</span>
+          <strong id="pollStatusText">Loading election details...</strong>
+        </div>
+      </section>
+
+      <section id="closedNotice" class="notice hidden" role="status">
+        Voting is currently closed. Please check again later.
+      </section>
+
+      <form id="voteForm" class="vote-layout" autocomplete="off"></form>
+
+      <section id="successModal" class="success-modal hidden" role="dialog" aria-modal="true" aria-live="assertive">
+        <div class="celebration-box">
+          <div class="confetti" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p class="eyebrow">Vote submitted</p>
+          <h2>Your vote has been recorded successfully</h2>
+          <p>This page will refresh in 5 seconds for the next student.</p>
+        </div>
+      </section>
+    </main>
+
+    <template id="positionTemplate">
+      <section class="position-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Position</p>
+            <h2></h2>
+          </div>
+          <span class="selection-count">Select one</span>
+        </div>
+        <div class="candidate-grid"></div>
+      </section>
+    </template>
+
+    <template id="candidateTemplate">
+      <label class="candidate-card">
+        <input type="radio">
+        <span class="candidate-photo-wrap">
+          <img alt="">
+        </span>
+        <span class="candidate-info">
+          <strong></strong>
+          <small></small>
+        </span>
+        <span class="check-indicator">Vote</span>
+      </label>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>

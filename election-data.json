@@ -1,0 +1,13 @@
+{
+  "pollOpen": true,
+  "candidates": [
+    {
+      "id": "f8a4996d-913e-47ae-90b7-6bb2b90b022c",
+      "name": "Sample Candidate",
+      "position": "Head Student",
+      "className": "10 A",
+      "image": "data:image/svg+xml;charset=UTF-8,%0A%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20300%22%3E%0A%20%20%20%20%3Crect%20width%3D%22400%22%20height%3D%22300%22%20fill%3D%22%23e7edf3%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22118%22%20r%3D%2254%22%20fill%3D%22%23176f7a%22%20opacity%3D%22.75%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M94%20267c22-65%2068-98%20106-98s84%2033%20106%2098%22%20fill%3D%22%23d89a2b%22%20opacity%3D%22.86%22%2F%3E%0A%20%20%3C%2Fsvg%3E",
+      "votes": 2
+    }
+  ]
+}
