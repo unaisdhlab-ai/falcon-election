@@ -400,6 +400,42 @@ function initAdminPage() {
   const imageInput = document.getElementById("candidateImage");
   let pendingImage = "";
 
+  // --- TEACHER VIEW / MANAGEMENT TAB CONTROLLER ENGINE ---
+  const tabShowResults = document.getElementById("tabShowResults");
+  const tabShowManage = document.getElementById("tabShowManage");
+  const resultsTabWrapper = document.getElementById("resultsTabWrapper");
+  const manageTabWrapper = document.getElementById("manageTabWrapper");
+
+  if (tabShowResults && tabShowManage) {
+    // 1. Switch Active View to Live Results Tab
+    tabShowResults.addEventListener("click", () => {
+      resultsTabWrapper.style.display = "block";
+      manageTabWrapper.style.display = "none";
+      
+      // Dynamic visual tab styling states
+      tabShowResults.style.background = "#3b82f6";
+      tabShowResults.style.color = "#ffffff";
+      tabShowManage.style.background = "transparent";
+      tabShowManage.style.color = "#475569";
+      
+      // Pull immediately from our ultra-fast RAM cache
+      if (typeof triggerAdminLiveUpdate === "function") {
+        triggerAdminLiveUpdate();
+      }
+    });
+
+    // 2. Switch Active View to Technical Settings Tab
+    tabShowManage.addEventListener("click", () => {
+      resultsTabWrapper.style.display = "none";
+      manageTabWrapper.style.display = "block";
+      
+      // Dynamic visual tab styling states
+      tabShowManage.style.background = "#3b82f6";
+      tabShowManage.style.color = "#ffffff";
+      tabShowResults.style.background = "transparent";
+      tabShowResults.style.color = "#475569";
+    });
+  }
   function showAdmin() {
     loginView.classList.add("hidden");
     adminView.classList.remove("hidden");

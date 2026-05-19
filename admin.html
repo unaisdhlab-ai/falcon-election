@@ -42,94 +42,122 @@
       </section>
 
       <section id="adminView" class="hidden">
-        <div class="admin-header">
+        <div class="admin-header" style="margin-bottom: 1.5rem;">
           <div>
             <p class="eyebrow">Control Room</p>
             <h1>Election admin panel</h1>
-            <p class="lede">Add candidates, open or close the poll, and review live totals.</p>
+            <p class="lede">Review live election standings or manage core candidate configurations.</p>
           </div>
           <button id="logoutButton" class="ghost-button" type="button">Sign out</button>
         </div>
 
-        <section class="toolbar">
-          <div>
-            <span id="adminPollBadge" class="badge">Poll status</span>
-            <strong id="adminPollText">Loading...</strong>
-          </div>
-          <div class="toolbar-actions">
-            <button id="openPollButton" type="button">Open poll</button>
-            <button id="closePollButton" class="danger-button" type="button">Close poll</button>
-          </div>
-        </section>
+        <div style="display: flex; gap: 12px; margin-bottom: 2rem; background: #e2e8f0; padding: 6px; border-radius: 12px; max-width: 520px;">
+          <button id="tabShowResults" type="button" style="flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; background: #3b82f6; color: #ffffff;">
+            📊 Live Standings View
+          </button>
+          <button id="tabShowManage" type="button" style="flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; background: transparent; color: #475569;">
+            ⚙️ Setup & Controls
+          </button>
+        </div>
 
-        <section class="admin-grid">
-          <form id="candidateForm" class="panel form-grid">
+        <div id="resultsTabWrapper">
+          <section class="panel" style="background: #ffffff; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);">
+            <div class="section-heading" style="margin-bottom: 2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem;">
+              <div>
+                <p class="eyebrow" style="color: #6366f1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">Live Election Center</p>
+                <h2 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin: 4px 0 0 0;">Real-Time Standings</h2>
+                <p style="color: #64748b; margin-top: 6px; font-size: 0.95rem;">Displays current leaders dynamically with live profile cards.</p>
+              </div>
+              <div style="text-align: right;">
+                <span class="badge" style="background: #ef4444; color: white; padding: 6px 14px; border-radius: 9999px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);">Live Tallying Active</span>
+              </div>
+            </div>
+            
+            <div id="candidateTable" class="admin-results-grid"></div>
+          </section>
+        </div>
+
+        <div id="manageTabWrapper" style="display: none;">
+          <section class="toolbar">
             <div>
-              <p class="eyebrow">Candidates</p>
-              <h2>Add or update candidate</h2>
+              <span id="adminPollBadge" class="badge">Poll status</span>
+              <strong id="adminPollText">Loading...</strong>
             </div>
-            <input id="candidateId" type="hidden">
-            <label>
-              Candidate name
-              <input id="candidateName" type="text" required>
-            </label>
-            <label>
-              Position
-              <input id="candidatePosition" type="text" placeholder="Head Boy, Sports Captain..." required>
-            </label>
-            <label>
-              Class
-              <input id="candidateClass" type="text" placeholder="10 A" required>
-            </label>
-            <label>
-              Candidate image
-              <input id="candidateImage" type="file" accept="image/*">
-            </label>
-            <div class="image-preview hidden" id="imagePreviewWrap">
-              <img id="imagePreview" alt="Candidate preview">
+            <div class="toolbar-actions">
+              <button id="openPollButton" type="button">Open poll</button>
+              <button id="closePollButton" class="danger-button" type="button">Close poll</button>
             </div>
-            <p id="candidateFormStatus" class="form-status" role="status"></p>
-            <div class="button-row">
-              <button type="submit">Save candidate</button>
-              <button id="clearFormButton" class="ghost-button" type="button">Clear</button>
-            </div>
-          </form>
+          </section>
 
-          <section class="panel">
+          <div class="admin-grid">
+            <form id="candidateForm" class="panel form-grid">
+              <div>
+                <p class="eyebrow">Candidates</p>
+                <h2>Add or update candidate</h2>
+              </div>
+              <input id="candidateId" type="hidden">
+              <label>
+                Candidate name
+                <input id="candidateName" type="text" required>
+              </label>
+              <label>
+                Position
+                <input id="candidatePosition" type="text" placeholder="Head Boy, Sports Captain..." required>
+              </label>
+              <label>
+                Class
+                <input id="candidateClass" type="text" placeholder="10 A" required>
+              </label>
+              <label>
+                Candidate image
+                <input id="candidateImage" type="file" accept="image/*">
+              </label>
+              <div class="image-preview hidden" id="imagePreviewWrap">
+                <img id="imagePreview" alt="Candidate preview">
+              </div>
+              <p id="candidateFormStatus" class="form-status" role="status"></p>
+              <div class="button-row">
+                <button type="submit">Save candidate</button>
+                <button id="clearFormButton" class="ghost-button" type="button">Clear</button>
+              </div>
+            </form>
+
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Live Results</p>
+                  <h2>Vote summary</h2>
+                </div>
+                <strong id="totalVotes">0 votes</strong>
+              </div>
+              <div id="leaderList" class="leader-list"></div>
+              <canvas id="resultsChart" height="260" aria-label="Voting results graph"></canvas>
+            </section>
+          </div>
+
+          <section class="panel" style="margin-top: 2rem;">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Live Results</p>
-                <h2>Vote summary</h2>
+                <p class="eyebrow">Position Results</p>
+                <h2>Separate results by position</h2>
               </div>
-              <strong id="totalVotes">0 votes</strong>
+              <span class="selection-count">Votes, percentage, and difference</span>
             </div>
-            <div id="leaderList" class="leader-list"></div>
-            <canvas id="resultsChart" height="260" aria-label="Voting results graph"></canvas>
+            <div id="positionResults" class="position-results"></div>
           </section>
-        </section>
 
-        <section class="panel">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Position Results</p>
-              <h2>Separate results by position</h2>
+          <section class="panel" style="margin-top: 2rem; border-top: 3px solid #fee2e2; background: #fff5f5;">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow" style="color: #ef4444;">Danger Zone</p>
+                <h2 style="color: #991b1b;">Factory Reset System</h2>
+                <p style="color: #b91c1c; font-size: 0.85rem; margin-top: 4px;">Clears out every cast vote from your database back to zero. This cannot be undone.</p>
+              </div>
+              <button id="resetVotesButton" class="danger-button" type="button">Reset All Ballots</button>
             </div>
-            <span class="selection-count">Votes, percentage, and difference</span>
-          </div>
-          <div id="positionResults" class="position-results"></div>
-        </section>
+          </section>
+        </div>
 
-        <section class="panel">
-  <div class="section-heading" style="margin-bottom: 2rem;">
-    <div>
-      <p class="eyebrow" style="color: #6366f1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Live Election Center</p>
-      <h2 style="font-size: 2rem; font-weight: 700; color: #1e293b;">Real-Time Standings</h2>
-    </div>
-    <button id="resetVotesButton" class="danger-button" type="button">Reset All Ballots</button>
-  </div>
-  
-  <div id="candidateTable" class="admin-results-grid"></div>
-</section>
       </section>
     </main>
 
