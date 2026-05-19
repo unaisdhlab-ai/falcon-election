@@ -360,10 +360,19 @@ async function submitGuidedVotes(button, selections, steps) {
   error.textContent = "";
 
   try {
-    for (const candidateId of selectedIds) {
-      await castVote(candidateId);
-    }
+    // Send all selected candidate IDs to the server in ONE single network trip
+    const response = await fetch(`${API_BASE}/vote-bulk`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ candidateIds: selectedIds })
+    });
+
+    if (!response.ok) throw new Error("Submission failed");
+
+    // Instantly trigger the confirmation modal 
     showSuccessModal();
+    
+    // Wait 5 seconds for them to see the confirmation, then refresh for the next voter
     setTimeout(() => {
       window.location.reload();
     }, 5000);
