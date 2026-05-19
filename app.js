@@ -518,6 +518,27 @@ function initAdminPage() {
       candidateFormStatus.textContent = "Candidate could not be saved. Please refresh and try again.";
     }
   });
+  // Automatically fetch and update admin counts live every 3 seconds
+  setInterval(async () => {
+    // Only fetch if the user is actively viewing the admin panel right now
+    const adminView = document.getElementById("adminView");
+    if (!adminView || adminView.classList.contains("hidden")) return;
+
+    try {
+      const response = await fetch(`${API_BASE}/api/election`);
+      if (!response.ok) return;
+      const data = await response.json();
+      
+      // Update the table on your screen with the fresh, real-time vote data
+      if (typeof renderAdminPage === "function") {
+        renderAdminPage(data);
+      } else if (typeof loadAdminData === "function") {
+        loadAdminData(); // Fallback to your existing loader if named differently
+      }
+    } catch (err) {
+      console.error("Live auto-update cycle paused:", err);
+    }
+  }, 3000);
 }
 
 function resizeImage(file) {
