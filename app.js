@@ -1135,8 +1135,8 @@ function renderResults(data) {
     leaders.appendChild(row);
   });
 
-  drawChart(data.candidates, total);
-  renderPositionResults(groups);
+drawChart(data.candidates, total);
+  renderPositionResults(groupedByPosition(data.candidates));
 }
 
 function renderPositionResults(groups) {
