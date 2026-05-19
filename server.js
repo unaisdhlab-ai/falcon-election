@@ -199,24 +199,37 @@ async function handleApi(request, response) {
     return;
   }
 
-  if (url.pathname === "/api/vote" && request.method === "POST") {
+if (url.pathname === "/api/vote-bulk" && request.method === "POST") {
     const body = await readBody(request);
     const data = readData();
+    
     if (!data.pollOpen) {
       sendJson(response, 409, { message: "Poll is closed" });
       return;
     }
-    const candidate = data.candidates.find((item) => item.id === body.candidateId);
-    if (!candidate) {
-      sendJson(response, 404, { message: "Candidate not found" });
-      return;
+
+    // Make sure we have an array of IDs to work with
+    const candidateIds = body.candidateIds || [];
+    let votesUpdated = false;
+
+    // Loop through the submitted selections and increment each one in memory
+    candidateIds.forEach(id => {
+      const candidate = data.candidates.find(item => item.id === id);
+      if (candidate) {
+        candidate.votes = Number(candidate.votes || 0) + 1;
+        votesUpdated = true;
+      }
+    });
+
+    // Save the updated counts in the background
+    if (votesUpdated) {
+      writeData(data);
     }
-    candidate.votes = Number(candidate.votes || 0) + 1;
-    writeData(data);
-    sendJson(response, 200, data);
+
+    // Instantly return success to the phone
+    sendJson(response, 200, { success: true });
     return;
   }
-
   sendJson(response, 404, { message: "Not found" });
 }
 
