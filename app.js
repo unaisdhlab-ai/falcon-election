@@ -2,7 +2,7 @@ const STORAGE_KEY = "falconElectionData";
 const SESSION_KEY = "falconElectionAdminSignedIn";
 const ADMIN_USERNAME = "unaisbaraka";
 const ADMIN_PASSWORD = "falconelection26";
-const API_BASE = window.location.protocol === "file:" ? "" : "/api";
+const API_BASE = window.location.protocol === "file:" ? "" : `${window.location.origin}/api`;
 
 const fallbackImage =
   "data:image/svg+xml;charset=UTF-8," +
