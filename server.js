@@ -55,7 +55,9 @@ function readData() {
 }
 
 function writeData(data) {
-  fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+  fs.writeFile(dataFile, JSON.stringify(data, null, 2), "utf8", (err) => {
+    if (err) console.error("Background data save failed:", err);
+  });
 }
 
 function localNetworkUrls() {
