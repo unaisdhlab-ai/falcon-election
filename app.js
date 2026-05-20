@@ -13,18 +13,73 @@ const fallbackImage =
     <path d="M94 267c22-65 68-98 106-98s84 33 106 98" fill="#d89a2b" opacity=".86"/>
   </svg>`);
 
+// MASTER ROSTER RECOVERY REPO (11 Positions, 41 Candidates formatted with default 0 votes)
 function defaultData() {
   return {
     pollOpen: true,
     candidates: [
-      {
-        id: crypto.randomUUID(),
-        name: "Sample Candidate",
-        position: "Head Student",
-        className: "10 A",
-        image: fallbackImage,
-        votes: 0
-      }
+      // 1. Prime Minister
+      { id: "pm-1", name: "Mohd Sadik", position: "Prime Minister", className: "9", image: fallbackImage, votes: 0 },
+      { id: "pm-2", name: "Candidate 2", position: "Prime Minister", className: "9", image: fallbackImage, votes: 0 },
+      { id: "pm-3", name: "Candidate 3", position: "Prime Minister", className: "10", image: fallbackImage, votes: 0 },
+      { id: "pm-4", name: "Candidate 4", position: "Prime Minister", className: "10", image: fallbackImage, votes: 0 },
+
+      // 2. Environmental Affairs
+      { id: "env-1", name: "Saliha", position: "Environmental Affairs", className: "8", image: fallbackImage, votes: 0 },
+      { id: "env-2", name: "Candidate 6", position: "Environmental Affairs", className: "7", image: fallbackImage, votes: 0 },
+      { id: "env-3", name: "Candidate 7", position: "Environmental Affairs", className: "8", image: fallbackImage, votes: 0 },
+      { id: "env-4", name: "Candidate 8", position: "Environmental Affairs", className: "9", image: fallbackImage, votes: 0 },
+
+      // 3. Fine Arts & Cultural Affairs
+      { id: "fa-1", name: "Zaira Khan", position: "Fine Arts & Cultural Affairs", className: "10", image: fallbackImage, votes: 0 },
+      { id: "fa-2", name: "Ziya", position: "Fine Arts & Cultural Affairs", className: "9", image: fallbackImage, votes: 0 },
+      { id: "fa-3", name: "Candidate 11", position: "Fine Arts & Cultural Affairs", className: "8", image: fallbackImage, votes: 0 },
+      { id: "fa-4", name: "Candidate 12", position: "Fine Arts & Cultural Affairs", className: "10", image: fallbackImage, votes: 0 },
+
+      // 4. Head Student
+      { id: "hs-1", name: "Candidate 13", position: "Head Student", className: "10 A", image: fallbackImage, votes: 0 },
+      { id: "hs-2", name: "Candidate 14", position: "Head Student", className: "10 B", image: fallbackImage, votes: 0 },
+      { id: "hs-3", name: "Candidate 15", position: "Head Student", className: "10 C", image: fallbackImage, votes: 0 },
+      { id: "hs-4", name: "Candidate 16", position: "Head Student", className: "10 D", image: fallbackImage, votes: 0 },
+
+      // 5. General Captain
+      { id: "gc-1", name: "Candidate 17", position: "General Captain", className: "10", image: fallbackImage, votes: 0 },
+      { id: "gc-2", name: "Candidate 18", position: "General Captain", className: "9", image: fallbackImage, votes: 0 },
+      { id: "gc-3", name: "Candidate 19", position: "General Captain", className: "10", image: fallbackImage, votes: 0 },
+      { id: "gc-4", name: "Candidate 20", position: "General Captain", className: "9", image: fallbackImage, votes: 0 },
+
+      // 6. Food & Health
+      { id: "fh-1", name: "Candidate 21", position: "Food & Health", className: "9", image: fallbackImage, votes: 0 },
+      { id: "fh-2", name: "Candidate 22", position: "Food & Health", className: "8", image: fallbackImage, votes: 0 },
+      { id: "fh-3", name: "Candidate 23", position: "Food & Health", className: "9", image: fallbackImage, votes: 0 },
+      { id: "fh-4", name: "Candidate 24", position: "Food & Health", className: "7", image: fallbackImage, votes: 0 },
+
+      // 7. Student Editor
+      { id: "se-1", name: "Candidate 25", position: "Student Editor", className: "10", image: fallbackImage, votes: 0 },
+      { id: "se-2", name: "Candidate 26", position: "Student Editor", className: "9", image: fallbackImage, votes: 0 },
+      { id: "se-3", name: "Candidate 27", position: "Student Editor", className: "10", image: fallbackImage, votes: 0 },
+      { id: "se-4", name: "Candidate 28", position: "Student Editor", className: "8", image: fallbackImage, votes: 0 },
+
+      // 8. Discipline & Welfare
+      { id: "dw-1", name: "Candidate 29", position: "Discipline & Welfare", className: "10", image: fallbackImage, votes: 0 },
+      { id: "dw-2", name: "Candidate 30", position: "Discipline & Welfare", className: "9", image: fallbackImage, votes: 0 },
+      { id: "dw-3", name: "Candidate 31", position: "Discipline & Welfare", className: "10", image: fallbackImage, votes: 0 },
+      { id: "dw-4", name: "Candidate 32", position: "Discipline & Welfare", className: "9", image: fallbackImage, votes: 0 },
+
+      // 9. IT & Media Coordinator
+      { id: "it-1", name: "Candidate 33", position: "IT & Media Coordinator", className: "10", image: fallbackImage, votes: 0 },
+      { id: "it-2", name: "Candidate 34", position: "IT & Media Coordinator", className: "9", image: fallbackImage, votes: 0 },
+      { id: "it-3", name: "Candidate 35", position: "IT & Media Coordinator", className: "10", image: fallbackImage, votes: 0 },
+
+      // 10. Science & Innovation
+      { id: "si-1", name: "Candidate 36", position: "Science & Innovation", className: "9", image: fallbackImage, votes: 0 },
+      { id: "si-2", name: "Candidate 37", position: "Science & Innovation", className: "8", image: fallbackImage, votes: 0 },
+      { id: "si-3", name: "Candidate 38", position: "Science & Innovation", className: "9", image: fallbackImage, votes: 0 },
+
+      // 11. Moral & Social Service
+      { id: "ms-1", name: "Candidate 39", position: "Moral & Social Service", className: "10", image: fallbackImage, votes: 0 },
+      { id: "ms-2", name: "Candidate 40", position: "Moral & Social Service", className: "9", image: fallbackImage, votes: 0 },
+      { id: "ms-3", name: "Mohd Rihan", position: "Moral & Social Service", className: "7", image: fallbackImage, votes: 0 }
     ]
   };
 }
@@ -36,7 +91,6 @@ function loadLocalData() {
     saveLocalData(starter);
     return starter;
   }
-
   try {
     const parsed = JSON.parse(raw);
     return {
@@ -66,14 +120,11 @@ async function requestData(path = "/election", options = {}) {
 
 async function loadData() {
   try {
-    const data = (await requestData()) || loadLocalData();
-    // Safety check that dynamic maps old candidates safely without breaking
-    if (data && Array.isArray(data.candidates)) {
-      data.candidates.forEach(candidate => {
-        if (candidate && candidate.votes === undefined) {
-          candidate.votes = 0;
-        }
-      });
+    let data = await requestData();
+    // SELF-HEAL: If server is empty or missing roster arrays, inject the full 41-candidate master blueprint
+    if (!data || !data.candidates || data.candidates.length <= 1) {
+      data = defaultData();
+      await saveData(data);
     }
     return data;
   } catch {
@@ -86,7 +137,6 @@ async function saveData(data) {
     saveLocalData(data);
     return data;
   }
-
   try {
     const saved = await requestData("/election", {
       method: "PUT",
@@ -320,36 +370,22 @@ function showVoteStep(stepNumber) {
 function renderVoteReview(steps, candidates, selections) {
   const reviewList = document.getElementById("voteReviewList");
   if (!reviewList) return;
-  
   reviewList.innerHTML = steps
     .map(([position]) => {
       const selected = candidates.find((candidate) => candidate.id === selections[position]);
       const hasSelection = !!selected;
-      
       return `
         <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: left;">
           <div style="flex: 1; padding-right: 12px;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: #4f46e5; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 2px;">
-              ${escapeHtml(position)}
-            </span>
-            <strong style="font-size: 1.05rem; color: #0f172a; font-weight: 700; display: block;">
-              ${hasSelection ? escapeHtml(selected.name) : "No selection"}
-            </strong>
-            ${hasSelection && selected.className ? `
-              <span style="font-size: 0.8rem; color: #64748b; font-weight: 500; display: block; margin-top: 1px;">
-                Class ${escapeHtml(selected.className)}
-              </span>
-            ` : ''}
+            <span style="font-size: 0.75rem; font-weight: 700; color: #4f46e5; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 2px;">${escapeHtml(position)}</span>
+            <strong style="font-size: 1.05rem; color: #0f172a; font-weight: 700; display: block;">${hasSelection ? escapeHtml(selected.name) : "No selection"}</strong>
+            ${hasSelection && selected.className ? `<span style="font-size: 0.8rem; color: #64748b; font-weight: 500; display: block; margin-top: 1px;">Class ${escapeHtml(selected.className)}</span>` : ''}
           </div>
           <div>
-            <span style="font-size: 0.8rem; background: ${hasSelection ? '#ecfdf5' : '#fef2f2'}; color: ${hasSelection ? '#065f46' : '#991b1b'}; padding: 6px 12px; border-radius: 9999px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; display: inline-block; white-space: nowrap;">
-              ${hasSelection ? '✓ Selected' : '✕ Missing'}
-            </span>
+            <span style="font-size: 0.8rem; background: ${hasSelection ? '#ecfdf5' : '#fef2f2'}; color: ${hasSelection ? '#065f46' : '#991b1b'}; padding: 6px 12px; border-radius: 9999px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; display: inline-block; white-space: nowrap;">${hasSelection ? '✓ Selected' : '✕ Missing'}</span>
           </div>
-        </div>
-      `;
-    })
-    .join("");
+        </div>`;
+    }).join("");
 }
 
 async function submitGuidedVotes(button, selections, steps) {
@@ -359,11 +395,9 @@ async function submitGuidedVotes(button, selections, steps) {
     error.textContent = "Please complete every position before submitting.";
     return;
   }
-
   button.disabled = true;
   button.textContent = "Submitting...";
   error.textContent = "";
-
   try {
     const data = await loadData();
     selectedIds.forEach(id => {
@@ -372,13 +406,9 @@ async function submitGuidedVotes(button, selections, steps) {
         targetCandidate.votes = Number(targetCandidate.votes || 0) + 1;
       }
     });
-
     await saveData(data);
     showSuccessModal();
-    
-    setTimeout(() => {
-      window.location.reload();
-    }, 5000);
+    setTimeout(() => { window.location.reload(); }, 5000);
   } catch {
     button.disabled = false;
     button.textContent = "Submit votes";
@@ -392,12 +422,11 @@ function showSuccessModal() {
 }
 
 /* ==========================================================================
-   👑 TEACHER VIEW: LUXURY FULL SCREEN REAL-TIME RANKED LEADBOARDS GRID
+   👑 TEACHER VIEW: LUXURY FULL SCREEN LEADBOARDS GRID WITH LIVE CHARTS
    ========================================================================== */
 function renderAdminPage(data) {
   const container = document.getElementById("candidateTable");
   if (!container) return;
-
   container.innerHTML = "";
 
   if (!data.candidates || !data.candidates.length) {
@@ -415,7 +444,7 @@ function renderAdminPage(data) {
     const positionTotalVotes = voteTotal(candidatesInPosition);
 
     const positionCard = document.createElement("div");
-    positionCard.style = "background: #ffffff; border-radius: 20px; padding: 2.5rem; margin-bottom: 2.5rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.03), 0 8px 10px -6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; width: 100%; box-sizing: border-box;";
+    positionCard.style = "background: #ffffff; border-radius: 20px; padding: 2.5rem; margin-bottom: 2.5rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; width: 100%; box-sizing: border-box;";
 
     const gridId = `grid-${posIndex}`;
     const chartSectionId = `chartSec-${posIndex}`;
@@ -428,82 +457,51 @@ function renderAdminPage(data) {
           <h3 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin: 0; letter-spacing: -0.02em;">${escapeHtml(positionName)}</h3>
           <p style="color: #64748b; font-size: 0.9rem; margin: 4px 0 0 0; font-weight: 500;">Real-time student rankings and visual data analytics</p>
         </div>
-        
         <div style="display: flex; gap: 8px; background: #f1f5f9; padding: 4px; border-radius: 8px;">
-          <button id="btnGrid-${posIndex}" type="button" style="padding: 6px 14px; font-size: 0.85rem; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; background: #3b82f6; color: #ffffff; transition: all 0.2s;">📇 Cards View</button>
-          <button id="btnChart-${posIndex}" type="button" style="padding: 6px 14px; font-size: 0.85rem; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; background: transparent; color: #475569; transition: all 0.2s;">📊 Analytics Charts</button>
+          <button id="btnGrid-${posIndex}" type="button" style="padding: 6px 14px; font-size: 0.85rem; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; background: #3b82f6; color: #ffffff;">📇 Cards View</button>
+          <button id="btnChart-${posIndex}" type="button" style="padding: 6px 14px; font-size: 0.85rem; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; background: transparent; color: #475569;">📊 Analytics Charts</button>
         </div>
       </div>
-
-      <div id="${gridId}" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; width: 100%;">
-    `;
+      <div id="${gridId}" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; width: 100%;">`;
 
     candidatesInPosition.forEach((candidate, index) => {
       const voteCount = Number(candidate.votes || 0);
       const rank = index + 1;
       const isLeading = voteCount === maxVotes && voteCount > 0;
-
-      let badgeBg = "#94a3b8"; 
-      if (rank === 1) badgeBg = "#f59e0b"; 
-      if (rank === 2) badgeBg = "#cbd5e1"; 
-      if (rank === 3) badgeBg = "#b45309"; 
+      let badgeBg = rank === 1 ? "#f59e0b" : rank === 2 ? "#cbd5e1" : rank === 3 ? "#b45309" : "#94a3b8";
 
       htmlContent += `
-        <div style="background: ${isLeading ? '#f8fafc' : '#ffffff'}; border: 2px solid ${isLeading ? '#3b82f6' : '#e2e8f0'}; border-radius: 16px; padding: 1.75rem 1.5rem; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: ${isLeading ? '0 4px 20px -2px rgba(59,130,246,0.08)' : 'none'}; transition: all 0.2s ease-in-out;">
-          
-          <div style="position: absolute; top: 14px; left: 14px; width: 34px; height: 34px; background: ${badgeBg}; color: white; font-weight: 800; font-size: 0.95rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-            ${rank}
+        <div style="background: ${isLeading ? '#f8fafc' : '#ffffff'}; border: 2px solid ${isLeading ? '#3b82f6' : '#e2e8f0'}; border-radius: 16px; padding: 1.75rem 1.5rem; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;">
+          <div style="position: absolute; top: 14px; left: 14px; width: 34px; height: 34px; background: ${badgeBg}; color: white; font-weight: 800; font-size: 0.95rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">${rank}</div>
+          ${isLeading ? `<div style="position: absolute; top: -12px; background: #3b82f6; color: #ffffff; font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 9999px;">👑 Winning Leader</div>` : ''}
+          <div style="width: 115px; height: 115px; border-radius: 50%; overflow: hidden; margin-top: 8px; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: center; background: #f8fafc;">
+            <img src="${candidateImage(candidate)}" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
-
-          ${isLeading ? `
-            <div style="position: absolute; top: -12px; background: #3b82f6; color: #ffffff; font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);">
-              👑 Winning Leader
-            </div>
-          ` : ''}
-
-          <div style="width: 115px; height: 115px; border-radius: 50%; overflow: hidden; margin-top: 8px; margin-bottom: 1.25rem; border: 4px solid ${isLeading ? '#3b82f6' : '#f1f5f9'}; box-shadow: 0 4px 10px rgba(0,0,0,0.03); background: #f8fafc; display: flex; align-items: center; justify-content: center;">
-            <img src="${candidateImage(candidate)}" alt="${escapeHtml(candidate.name)} photo" style="width: 100%; height: 100%; object-fit: cover;">
+          <h4 style="font-size: 1.3rem; font-weight: 700; color: #1e293b; margin: 0;">${escapeHtml(candidate.name)}</h4>
+          <p style="font-size: 0.85rem; color: #64748b; font-weight: 600; margin: 4px 0 1.5rem 0;">Class ${escapeHtml(candidate.className || 'N/A')}</p>
+          <div style="margin-top: auto; width: 100%; background: ${isLeading ? '#eff6ff' : '#f8fafc'}; border-radius: 12px; padding: 12px 0;">
+            <span style="font-size: 0.75rem; color: #64748b; display: block; font-weight: 700;">Ballots Cast</span>
+            <span style="font-size: 2.25rem; font-weight: 900; color: ${isLeading ? '#2563eb' : '#0f172a'};">${voteCount}</span>
           </div>
-
-          <h4 style="font-size: 1.3rem; font-weight: 700; color: #1e293b; margin: 0 0 4px 0; letter-spacing: -0.01em;">${escapeHtml(candidate.name)}</h4>
-          <p style="font-size: 0.85rem; color: #64748b; font-weight: 600; margin: 0 0 1.5rem 0;">Class ${escapeHtml(candidate.className || 'N/A')}</p>
-
-          <div style="margin-top: auto; width: 100%; background: ${isLeading ? '#eff6ff' : '#f8fafc'}; border-radius: 12px; padding: 12px 0; border: 1px solid ${isLeading ? '#dbeafe' : '#f1f5f9'};">
-            <span style="font-size: 0.75rem; color: #64748b; display: block; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 2px;">Ballots Cast</span>
-            <span style="font-size: 2.25rem; font-weight: 900; color: ${isLeading ? '#2563eb' : '#0f172a'}; line-height: 1;">${voteCount}</span>
-          </div>
-
           <div style="display: flex; gap: 8px; margin-top: 14px; width: 100%; justify-content: center;">
-            <button type="button" style="padding: 5px 14px; font-size: 0.8rem; font-weight: 700; border-radius: 6px; cursor: pointer; border: 1px solid #cbd5e1; background: #ffffff; color: #1e293b;" data-edit="${candidate.id}">Edit</button>
+            <button type="button" style="padding: 5px 14px; font-size: 0.8rem; font-weight: 700; border-radius: 6px; cursor: pointer; border: 1px solid #cbd5e1; background: #ffffff;" data-edit="${candidate.id}">Edit</button>
             <button type="button" style="padding: 5px 14px; font-size: 0.8rem; font-weight: 700; border-radius: 6px; cursor: pointer; border: 1px solid #fee2e2; background: #fff5f5; color: #991b1b;" data-delete="${candidate.id}">Delete</button>
           </div>
-        </div>
-      `;
+        </div>`;
     });
 
     htmlContent += `
       </div>
-
-      <div id="${chartSectionId}" style="display: none; width: 100%; box-sizing: border-box;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; width: 100%; align-items: center; background: #f8fafc; padding: 2rem; border-radius: 16px; border: 1px dashed #cbd5e1;">
-          
-          <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); min-height: 280px; display: flex; flex-direction: column; justify-content: center;">
-            <h4 style="margin: 0 0 1rem 0; color: #1e293b; font-size: 1rem; font-weight: 700; text-align: center;">📊 Vote Volume (Bar Graph)</h4>
-            <div style="position: relative; width: 100%; height: 220px;">
-              <canvas id="${barCanvasId}"></canvas>
-            </div>
+      <div id="${chartSectionId}" style="display: none; width: 100%;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; background: #f8fafc; padding: 2rem; border-radius: 16px;">
+          <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; height: 240px; position: relative;">
+            <canvas id="${barCanvasId}"></canvas>
           </div>
-
-          <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); min-height: 280px; display: flex; flex-direction: column; justify-content: center;">
-            <h4 style="margin: 0 0 1rem 0; color: #1e293b; font-size: 1rem; font-weight: 700; text-align: center;">🍰 Share Percentage (Pie Chart)</h4>
-            <div style="position: relative; width: 100%; height: 220px; display: flex; justify-content: center;">
-              <canvas id="${pieCanvasId}"></canvas>
-            </div>
+          <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; height: 240px; position: relative;">
+            <canvas id="${pieCanvasId}"></canvas>
           </div>
-
         </div>
-      </div>
-    `;
+      </div>`;
 
     positionCard.innerHTML = htmlContent;
     container.appendChild(positionCard);
@@ -513,7 +511,6 @@ function renderAdminPage(data) {
     const percentagesData = candidatesInPosition.map(c => positionTotalVotes ? Math.round((Number(c.votes || 0) / positionTotalVotes) * 100) : 0);
 
     const primaryColors = ['#3b82f6', '#f59e0b', '#10b981', '#ec4899', '#8b5cf6', '#6366f1', '#14b8a6', '#f43f5e'];
-    const hoverColors = ['#2563eb', '#d97706', '#059669', '#db2777', '#7c3aed', '#4f46e5', '#0d9488', '#e11d48'];
 
     setTimeout(() => {
       const barCtx = document.getElementById(barCanvasId)?.getContext('2d');
@@ -522,88 +519,36 @@ function renderAdminPage(data) {
       if (barCtx && typeof Chart !== 'undefined') {
         new Chart(barCtx, {
           type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Votes Cast',
-              data: votesData,
-              backgroundColor: primaryColors.slice(0, labels.length),
-              borderWidth: 0,
-              borderRadius: 6
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
-          }
+          data: { labels: labels, datasets: [{ data: votesData, backgroundColor: primaryColors.slice(0, labels.length), borderRadius: 6 }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
         });
       }
-
       if (pieCtx && typeof Chart !== 'undefined') {
         new Chart(pieCtx, {
           type: 'pie',
-          data: {
-            labels: labels.map((l, idx) => `${l} (${percentagesData[idx]}%)`),
-            datasets: [{
-              data: votesData,
-              backgroundColor: primaryColors.slice(0, labels.length),
-              hoverBackgroundColor: hoverColors.slice(0, labels.length),
-              borderWidth: 2,
-              borderColor: '#ffffff'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { weight: 600 } } } }
-          }
+          data: { labels: labels.map((l, idx) => `${l} (${percentagesData[idx]}%)`), datasets: [{ data: votesData, backgroundColor: primaryColors.slice(0, labels.length) }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
         });
       }
     }, 50);
 
-    const btnGrid = document.getElementById(`btnGrid-${posIndex}`);
-    const btnChart = document.getElementById(`btnChart-${posIndex}`);
-    const gridView = document.getElementById(gridId);
-    const chartView = document.getElementById(chartSectionId);
-
-    btnGrid?.addEventListener("click", () => {
-      gridView.style.display = "grid";
-      chartView.style.display = "none";
-      btnGrid.style.background = "#3b82f6";
-      btnGrid.style.color = "#ffffff";
-      btnChart.style.background = "transparent";
-      btnChart.style.color = "#475569";
+    document.getElementById(`btnGrid-${posIndex}`)?.addEventListener("click", () => {
+      document.getElementById(gridId).style.display = "grid";
+      document.getElementById(chartSectionId).style.display = "none";
     });
-
-    btnChart?.addEventListener("click", () => {
-      gridView.style.display = "none";
-      chartView.style.display = "block";
-      btnChart.style.background = "#3b82f6";
-      btnChart.style.color = "#ffffff";
-      btnGrid.style.background = "transparent";
-      btnGrid.style.color = "#475569";
+    document.getElementById(`btnChart-${posIndex}`)?.addEventListener("click", () => {
+      document.getElementById(gridId).style.display = "none";
+      document.getElementById(chartSectionId).style.display = "block";
     });
   });
 
-  container.querySelectorAll("[data-edit]").forEach((button) => {
-    button.addEventListener("click", () => editCandidate(button.dataset.edit));
-  });
-  container.querySelectorAll("[data-delete]").forEach((button) => {
-    button.addEventListener("click", () => deleteCandidate(button.dataset.delete));
-  });
+  container.querySelectorAll("[data-edit]").forEach(btn => btn.addEventListener("click", () => editCandidate(btn.dataset.edit)));
+  container.querySelectorAll("[data-delete]").forEach(btn => btn.addEventListener("click", () => deleteCandidate(btn.dataset.delete)));
 }
 
 function renderAdmin() {
   loadData().then(data => {
     updatePollBadges(data.pollOpen);
-    const adminPollText = document.getElementById("adminPollText");
-    if (adminPollText) {
-      adminPollText.textContent = data.pollOpen
-        ? "Public users can vote after refreshing the poll page."
-        : "Public users will see voting closed after refreshing the poll page.";
-    }
     renderAdminPage(data);
     renderResults(data);
   });
@@ -612,131 +557,43 @@ function renderAdmin() {
 function renderResults(data) {
   const total = voteTotal(data.candidates);
   const totalVotesElem = document.getElementById("totalVotes");
-  if (totalVotesElem) {
-    totalVotesElem.textContent = `${total} ${total === 1 ? "vote" : "votes"}`;
-  }
+  if (totalVotesElem) totalVotesElem.textContent = `${total} votes`;
   
-  const leaders = document.getElementById("leaderList");
-  if (leaders) {
-    leaders.innerHTML = "";
-    const groups = groupedByPosition(data.candidates);
-    Object.entries(groups).forEach(([position, candidates]) => {
-      const sorted = [...candidates].sort((a, b) => Number(b.votes || 0) - Number(a.votes || 0));
-      const leader = sorted[0];
-      const positionTotal = voteTotal(candidates);
-      const row = document.createElement("div");
-      row.className = "leader-row";
-      row.innerHTML = `
-        <div>
-          <strong>${escapeHtml(position)}</strong>
-          <small>Leading: ${leader ? escapeHtml(leader.name) : "No candidate"} (${leader ? Number(leader.votes || 0) : 0} votes)</small>
-        </div>
-        <strong>${leader ? percent(leader, positionTotal) : "0%"}</strong>
-      `;
-      leaders.appendChild(row);
-    });
-  }
-
-  // Safety checker prevents runtime halts if legacy drawChart references are omitted
-  const legacyChart = document.getElementById("resultsChart");
-  if (legacyChart && typeof drawChart === "function") {
-    drawChart(data.candidates, total);
-  }
-  
-  renderPositionResults(groupedByPosition(data.candidates));
-}
-
-function renderPositionResults(groups) {
   const container = document.getElementById("positionResults");
   if (!container) return;
   container.innerHTML = "";
 
+  const groups = groupedByPosition(data.candidates);
   Object.entries(groups).forEach(([position, candidates]) => {
     const sorted = [...candidates].sort((a, b) => Number(b.votes || 0) - Number(a.votes || 0));
     const positionTotal = voteTotal(sorted);
     const leader = sorted[0];
-    const second = sorted[1];
-    const leaderVotes = Number(leader?.votes || 0);
-    const secondVotes = Number(second?.votes || 0);
-    const difference = leaderVotes - secondVotes;
-    const differencePercent = percentNumber(difference, positionTotal);
 
     const card = document.createElement("article");
     card.className = "position-result-card";
     card.innerHTML = `
       <div class="position-result-head">
-        <div>
-          <h3>${escapeHtml(position)}</h3>
-          <p>${positionTotal} ${positionTotal === 1 ? "vote" : "votes"} total</p>
-        </div>
-        <div class="result-lead">
-          <strong>${leader ? escapeHtml(leader.name) : "No leader"}</strong>
-          <span>Lead: ${difference} ${difference === 1 ? "vote" : "votes"} (${differencePercent}%)</span>
-        </div>
+        <div><h3>${escapeHtml(position)}</h3><p>${positionTotal} votes total</p></div>
+        <div class="result-lead"><strong>Frontrunner: ${leader ? escapeHtml(leader.name) : "None"}</strong></div>
       </div>
       <div class="position-bars">
-        ${sorted.map((candidate, index) => resultBar(candidate, positionTotal, index)).join("")}
-      </div>
-    `;
+        ${sorted.map((c) => {
+          const v = Number(c.votes || 0);
+          const pct = positionTotal ? Math.round((v / positionTotal) * 100) : 0;
+          return `
+            <div class="result-bar-row">
+              <div class="result-name"><strong>${escapeHtml(c.name)}</strong><small>Class ${escapeHtml(c.className)}</small></div>
+              <div class="result-bar-track"><span style="width: ${pct}%"></span></div>
+              <div class="result-numbers"><strong>${v}</strong><small>${pct}%</small></div>
+            </div>`;
+        }).join("")}
+      </div>`;
     container.appendChild(card);
   });
 }
 
-function resultBar(candidate, total, index) {
-  const votes = Number(candidate.votes || 0);
-  const candidatePercent = percentNumber(votes, total);
-  const barWidth = total ? candidatePercent : 0;
-  return `
-    <div class="result-bar-row">
-      <div class="result-name">
-        <strong>${escapeHtml(candidate.name)}</strong>
-        <small>Class ${escapeHtml(candidate.className)}</small>
-      </div>
-      <div class="result-bar-track" aria-label="${escapeHtml(candidate.name)} result">
-        <span class="${index === 0 ? "leading" : ""}" style="width: ${barWidth}%"></span>
-      </div>
-      <div class="result-numbers">
-        <strong>${votes}</strong>
-        <small>${candidatePercent}%</small>
-      </div>
-    </div>
-  `;
-}
-
-function resizeImage(file) {
-  return new Promise((resolve, reject) => {
-    if (!file.type.startsWith("image/")) {
-      reject(new Error("Invalid image"));
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onerror = reject;
-    reader.onload = () => {
-      const image = new Image();
-      image.onerror = reject;
-      image.onload = () => {
-        const maxSize = 900;
-        const scale = Math.min(1, maxSize / Math.max(image.naturalWidth, image.naturalHeight));
-        const width = Math.max(1, Math.round(image.naturalWidth * scale));
-        const height = Math.max(1, Math.round(image.naturalWidth * scale));
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        const context = canvas.getContext("2d");
-        context.fillStyle = "#f7f9fc";
-        context.fillRect(0, 0, width, height);
-        context.drawImage(image, 0, 0, width, height);
-        resolve(canvas.toDataURL("image/jpeg", 0.82));
-      };
-      image.src = reader.result;
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
 /* ==========================================================================
-   ADMIN SETTINGS APPLICATION MODULE
+   ADMIN AUTHENTICATION LOOP CONTROL
    ========================================================================== */
 function initAdminPage() {
   const loginView = document.getElementById("loginView");
@@ -747,204 +604,98 @@ function initAdminPage() {
   const loginError = document.getElementById("loginError");
   const candidateForm = document.getElementById("candidateForm");
   const candidateFormStatus = document.getElementById("candidateFormStatus");
-  const imageInput = document.getElementById("candidateImage");
-  let pendingImage = "";
 
-  const tabShowResults = document.getElementById("tabShowResults");
-  const tabShowManage = document.getElementById("tabShowManage");
-  const resultsTabWrapper = document.getElementById("resultsTabWrapper");
-  const manageTabWrapper = document.getElementById("manageTabWrapper");
-
-  if (tabShowResults && tabShowManage) {
-    tabShowResults.addEventListener("click", () => {
-      resultsTabWrapper.style.display = "block";
-      manageTabWrapper.style.display = "none";
-      
-      tabShowResults.style.background = "#3b82f6";
-      tabShowResults.style.color = "#ffffff";
-      tabShowManage.style.background = "transparent";
-      tabShowManage.style.color = "#475569";
-      
-      triggerAdminLiveUpdate();
-    });
-
-    tabShowManage.addEventListener("click", () => {
-      resultsTabWrapper.style.display = "none";
-      manageTabWrapper.style.display = "block";
-      
-      tabShowManage.style.background = "#3b82f6";
-      tabShowManage.style.color = "#ffffff";
-      tabShowResults.style.background = "transparent";
-      tabShowResults.style.color = "#475569";
-    });
-  }
-
-  function showAdmin() {
+  if (sessionStorage.getItem(SESSION_KEY) === "true") {
     loginView.classList.add("hidden");
     adminView.classList.remove("hidden");
     renderAdmin();
   }
 
-  function showLogin() {
-    loginView.classList.remove("hidden");
-    adminView.classList.add("hidden");
-  }
-
-  if (sessionStorage.getItem(SESSION_KEY) === "true") showAdmin();
-  else showLogin();
-
-  loginForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value;
-    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (document.getElementById("username").value.trim() === ADMIN_USERNAME && document.getElementById("password").value === ADMIN_PASSWORD) {
       sessionStorage.setItem(SESSION_KEY, "true");
-      loginError.textContent = "";
-      showAdmin();
+      loginView.classList.add("hidden");
+      adminView.classList.remove("hidden");
+      renderAdmin();
     } else {
       loginError.textContent = "Incorrect username or password.";
     }
   });
 
-  document.getElementById("logoutButton").addEventListener("click", () => {
+  document.getElementById("logoutButton")?.addEventListener("click", () => {
     sessionStorage.removeItem(SESSION_KEY);
-    showLogin();
+    window.location.reload();
   });
 
-  document.getElementById("openPollButton").addEventListener("click", async () => {
-    const data = await loadData();
-    data.pollOpen = true;
-    await saveData(data);
-    renderAdmin();
+  document.getElementById("openPollButton")?.addEventListener("click", async () => {
+    const data = await loadData(); data.pollOpen = true; await saveData(data); renderAdmin();
+  });
+  document.getElementById("closePollButton")?.addEventListener("click", async () => {
+    const data = await loadData(); data.pollOpen = false; await saveData(data); renderAdmin();
+  });
+  document.getElementById("resetVotesButton")?.addEventListener("click", async () => {
+    if (!confirm("Reset all votes to zero?")) return;
+    const data = await loadData(); data.candidates.forEach(c => c.votes = 0); await saveData(data); renderAdmin();
   });
 
-  document.getElementById("closePollButton").addEventListener("click", async () => {
-    const data = await loadData();
-    data.pollOpen = false;
-    await saveData(data);
-    renderAdmin();
-  });
-
-  document.getElementById("resetVotesButton").addEventListener("click", async () => {
-    if (!confirm("Reset all candidate votes to zero?")) return;
-    const data = await loadData();
-    data.candidates.forEach((candidate) => {
-      candidate.votes = 0;
-    });
-    await saveData(data);
-    renderAdmin();
-  });
-
-  document.getElementById("clearFormButton").addEventListener("click", () => {
-    candidateForm.reset();
-    document.getElementById("candidateId").value = "";
-    pendingImage = "";
-    candidateFormStatus.textContent = "";
-    document.getElementById("imagePreviewWrap").classList.add("hidden");
-  });
-
-  imageInput.addEventListener("change", async () => {
-    const file = imageInput.files[0];
-    if (!file) return;
-    candidateFormStatus.classList.remove("error");
-    candidateFormStatus.textContent = "Preparing photo...";
-    try {
-      pendingImage = await resizeImage(file);
-      document.getElementById("imagePreview").src = pendingImage;
-      document.getElementById("imagePreviewWrap").classList.remove("hidden");
-      candidateFormStatus.textContent = "Photo ready.";
-    } catch {
-      pendingImage = "";
-      imageInput.value = "";
-      candidateFormStatus.classList.add("error");
-      candidateFormStatus.textContent = "Please choose a valid image file.";
-    }
-  });
-
-  candidateForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    candidateFormStatus.classList.remove("error");
+  candidateForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
     candidateFormStatus.textContent = "Saving candidate...";
     try {
       const data = await loadData();
       const id = document.getElementById("candidateId").value || crypto.randomUUID();
-      const existing = data.candidates.find((candidate) => candidate.id === id);
-      const nextCandidate = {
+      const existing = data.candidates.find(c => c.id === id);
+      const nextCand = {
         id,
         name: document.getElementById("candidateName").value.trim(),
         position: document.getElementById("candidatePosition").value.trim(),
         className: document.getElementById("candidateClass").value.trim(),
-        image: pendingImage || existing?.image || fallbackImage,
+        image: existing?.image || fallbackImage,
         votes: Number(existing?.votes || 0)
       };
 
-      if (existing) {
-        Object.assign(existing, nextCandidate);
-      } else {
-        data.candidates.push(nextCandidate);
-      }
+      if (existing) Object.assign(existing, nextCand);
+      else data.candidates.push(nextCand);
 
-      const savedData = await saveData(data);
+      await saveData(data);
       candidateForm.reset();
       document.getElementById("candidateId").value = "";
-      pendingImage = "";
-      document.getElementById("imagePreviewWrap").classList.add("hidden");
       candidateFormStatus.textContent = "Candidate saved.";
       renderAdmin();
     } catch {
-      candidateFormStatus.classList.add("error");
-      candidateFormStatus.textContent = "Candidate could not be saved. Please refresh and try again.";
+      candidateFormStatus.textContent = "Error saving candidate.";
     }
   });
 
-  async function triggerAdminLiveUpdate() {
-    const adminView = document.getElementById("adminView");
-    if (!adminView || adminView.classList.contains("hidden")) return;
-
-    try {
-      const response = await fetch(`${API_BASE}/election`);
-      if (!response.ok) return;
-      const data = await response.json();
-      renderAdminPage(data);
-    } catch (err) {
-      console.error("Live update cycle paused:", err);
+  setInterval(() => {
+    if (adminView && !adminView.classList.contains("hidden")) {
+      fetch(`${API_BASE}/election`).then(r => r.json()).then(d => renderAdminPage(d));
     }
-  }
-
-  setInterval(triggerAdminLiveUpdate, 3000);
+  }, 4000);
 }
 
 async function editCandidate(id) {
   const data = await loadData();
-  const candidate = data.candidates.find((item) => item.id === id);
-  if (!candidate) return;
-  
-  document.getElementById("tabShowManage").click();
-  
-  document.getElementById("candidateId").value = candidate.id;
-  document.getElementById("candidateName").value = candidate.name;
-  document.getElementById("candidatePosition").value = candidate.position;
-  document.getElementById("candidateClass").value = candidate.className;
-  document.getElementById("imagePreview").src = candidateImage(candidate);
-  document.getElementById("imagePreviewWrap").classList.remove("hidden");
+  const c = data.candidates.find(item => item.id === id);
+  if (!c) return;
+  document.getElementById("candidateId").value = c.id;
+  document.getElementById("candidateName").value = c.name;
+  document.getElementById("candidatePosition").value = c.position;
+  document.getElementById("candidateClass").value = c.className;
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 async function deleteCandidate(id) {
-  if (!confirm("Delete this candidate? Their votes will also be removed.")) return;
+  if (!confirm("Delete candidate?")) return;
   const data = await loadData();
-  data.candidates = data.candidates.filter((candidate) => candidate.id !== id);
+  data.candidates = data.candidates.filter(c => c.id !== id);
   await saveData(data);
   renderAdmin();
 }
 
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+function escapeHtml(v) {
+  return String(v ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
 }
 
 initPublicPage();
