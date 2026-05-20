@@ -2,7 +2,7 @@ const STORAGE_KEY = "falconElectionData";
 const SESSION_KEY = "falconElectionAdminSignedIn";
 const ADMIN_USERNAME = "unaisbaraka";
 const ADMIN_PASSWORD = "falconelection26";
-const API_BASE = window.location.protocol === "file:" ? "" : `${window.location.origin}`;
+const API_BASE = window.location.protocol === "file:" ? "" : window.location.origin;
 
 const fallbackImage =
   "data:image/svg+xml;charset=UTF-8," +
@@ -67,6 +67,7 @@ async function requestData(path = "/election", options = {}) {
 async function loadData() {
   try {
     const data = (await requestData()) || loadLocalData();
+    // Safety check that dynamic maps old candidates safely without breaking
     if (data && Array.isArray(data.candidates)) {
       data.candidates.forEach(candidate => {
         if (candidate && candidate.votes === undefined) {
@@ -109,7 +110,7 @@ function groupedByPosition(candidates) {
 }
 
 function voteTotal(candidates) {
-  if (!typeof candidates === "object" || !candidates) return 0;
+  if (!Array.isArray(candidates)) return 0;
   return candidates.reduce((sum, candidate) => sum + Number(candidate?.votes || 0), 0);
 }
 
@@ -630,13 +631,13 @@ function renderResults(data) {
           <strong>${escapeHtml(position)}</strong>
           <small>Leading: ${leader ? escapeHtml(leader.name) : "No candidate"} (${leader ? Number(leader.votes || 0) : 0} votes)</small>
         </div>
-        strong>${leader ? percent(leader, positionTotal) : "0%"}</strong>
+        <strong>${leader ? percent(leader, positionTotal) : "0%"}</strong>
       `;
       leaders.appendChild(row);
     });
   }
 
-  // Fallback safety check: skips canvas charting dynamically if the code function is absent
+  // Safety checker prevents runtime halts if legacy drawChart references are omitted
   const legacyChart = document.getElementById("resultsChart");
   if (legacyChart && typeof drawChart === "function") {
     drawChart(data.candidates, total);
