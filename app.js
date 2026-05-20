@@ -12,7 +12,7 @@ function defaultData() {
     pollOpen: true,
     candidates: [
       // 1. Prime Minister
-      { id: "pm-1", name: "Mohammad Sadiq", position: "Prime Minister", className: "9", image: "public-images/Sadiq.png", votes: 0 },
+      { id: "pm-1", name: "Mohammad Sadiq", position: "Prime Minister", className: "9", image: "public-images/Sadik.png", votes: 0 },
       { id: "pm-2", name: "Shifa Mohd", position: "Prime Minister", className: "9", image: "public-images/Shifa.png", votes: 0 },
       { id: "pm-3", name: "Ayana", position: "Prime Minister", className: "8", image: "public-images/Ayana.png", votes: 0 },
 
@@ -36,7 +36,7 @@ function defaultData() {
       { id: "sprt-1", name: "Naved Khan", position: "Sports Affairs", className: "6", image: "public-images/Naved.png", votes: 0 },
       { id: "sprt-2", name: "Shaban Ali", position: "Sports Affairs", className: "5", image: "public-images/Shaban.png", votes: 0 },
       { id: "sprt-3", name: "Diyan Rahman", position: "Sports Affairs", className: "8", image: "public-images/Diyan.png", votes: 0 },
-      { id: "sprt-4", name: "Mohammad Shayaaw Alam Khan", position: "Sports Affairs", className: "5", image: "public-images/Shayan.png", votes: 0 },
+      { id: "sprt-4", name: "Shayaan Alam Khan", position: "Sports Affairs", className: "5", image: "public-images/Shayan.png", votes: 0 },
       { id: "sprt-5", name: "Adeeba Rahees", position: "Sports Affairs", className: "5", image: "public-images/Adeeba.png", votes: 0 },
       { id: "sprt-6", name: "Mohd Zishan", position: "Sports Affairs", className: "5", image: "public-images/Zishan.png", votes: 0 },
 
@@ -54,14 +54,14 @@ function defaultData() {
       { id: "env-1", name: "Saliha", position: "Environmental Affairs", className: "5", image: "public-images/Saliha.png", votes: 0 },
       { id: "env-2", name: "Ziya Khan", position: "Environmental Affairs", className: "5", image: "public-images/Ziya.png", votes: 0 },
       { id: "env-3", name: "Sadikha Khan", position: "Environmental Affairs", className: "5", image: "public-images/Sadikha.png", votes: 0 },
-      { id: "env-4", name: "Aaliya Ahmad", position: "Environmental Affairs", className: "5", image: "public-images/Aaliyaa.png", votes: 0 },
+      { id: "env-4", name: "Aaliya Ahmad", position: "Environmental Affairs", className: "5", image: "public-images/Aaliya.png", votes: 0 },
       { id: "env-5", name: "Farheen Khan", position: "Environmental Affairs", className: "3", image: "public-images/Farheen.png", votes: 0 },
       { id: "env-6", name: "Iffat Zohra", position: "Environmental Affairs", className: "3", image: "public-images/Iffath.png", votes: 0 },
 
       // 9. Health & Hygiene
       { id: "hlth-1", name: "Mohd Anas", position: "Health & Hygiene", className: "5", image: "public-images/Anas.png", votes: 0 },
       { id: "hlth-2", name: "Sara", position: "Health & Hygiene", className: "6", image: "public-images/Sara.png", votes: 0 },
-      { id: "hlth-3", name: "Aaliya", position: "Health & Hygiene", className: "7", image: "public-images/Aliya.png", votes: 0 },
+      { id: "hlth-3", name: "Aaliya", position: "Health & Hygiene", className: "7", image: "public-images/Aliyaa.png", votes: 0 },
 
       // 10. Media & Communications
       { id: "med-1", name: "Nuraiz Irfan", position: "Media & Communications", className: "6", image: "public-images/Nuraiz.png", votes: 0 },
@@ -70,8 +70,8 @@ function defaultData() {
 
       // 11. Academic Affairs
       { id: "acad-1", name: "Mohd Abdullah", position: "Academic Affairs", className: "7", image: "public-images/Abdulla.png", votes: 0 },
-      { id: "acad-2", name: "Aaliya Khan", position: "Academic Affairs", className: "6", image: "public-images/Aaliya.png", votes: 0 },
-      { id: "acad-3", name: "Anjeeda Khan", position: "Academic Affairs", className: "5", image: "public-images/Anjeela.png", votes: 0 },
+      { id: "acad-2", name: "Aaliya Khan", position: "Academic Affairs", className: "6", image: "public-images/Aliya.png", votes: 0 },
+      { id: "acad-3", name: "Anjeela Khan", position: "Academic Affairs", className: "5", image: "public-images/Anjeela.png", votes: 0 },
       { id: "acad-4", name: "Warda Khan", position: "Academic Affairs", className: "5", image: "public-images/Warda.png", votes: 0 }
     ]
   };
