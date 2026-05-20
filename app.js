@@ -61,7 +61,7 @@ function defaultData() {
       // 9. Health & Hygiene
       { id: "hlth-1", name: "Mohd Anas", position: "Health & Hygiene", className: "5", image: "public-images/Anas.png", votes: 0 },
       { id: "hlth-2", name: "Sara", position: "Health & Hygiene", className: "6", image: "public-images/Sara.png", votes: 0 },
-      { id: "hlth-3", name: "Aaliya", position: "Health & Hygiene", className: "7", image: "public-images/Aliyaa.png", votes: 0 },
+      { id: "hlth-3", name: "Aaliya", position: "Health & Hygiene", className: "7", image: "public-images/Aaliyaa.png", votes: 0 },
 
       // 10. Media & Communications
       { id: "med-1", name: "Nuraiz Irfan", position: "Media & Communications", className: "6", image: "public-images/Nuraiz.png", votes: 0 },
