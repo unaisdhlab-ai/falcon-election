@@ -4,82 +4,75 @@ const ADMIN_USERNAME = "unaisbaraka";
 const ADMIN_PASSWORD = "falconelection26";
 const API_BASE = window.location.protocol === "file:" ? "" : window.location.origin;
 
-const fallbackImage =
-  "data:image/svg+xml;charset=UTF-8," +
-  encodeURIComponent(`
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-    <rect width="400" height="300" fill="#e7edf3"/>
-    <circle cx="200" cy="118" r="54" fill="#176f7a" opacity=".75"/>
-    <path d="M94 267c22-65 68-98 106-98s84 33 106 98" fill="#d89a2b" opacity=".86"/>
-  </svg>`);
+const fallbackImage = "public-images/placeholder.png";
 
-// MASTER ROSTER RECOVERY REPO (11 Positions, 41 Candidates formatted with default 0 votes)
+// RESTORED MASTER BLUEPRINT WITH ALL 41 REAL CANDIDATES AUTOMATICALLY LINKED TO IMAGES
 function defaultData() {
   return {
     pollOpen: true,
     candidates: [
       // 1. Prime Minister
-      { id: "pm-1", name: "Mohd Sadik", position: "Prime Minister", className: "9", image: fallbackImage, votes: 0 },
-      { id: "pm-2", name: "Candidate 2", position: "Prime Minister", className: "9", image: fallbackImage, votes: 0 },
-      { id: "pm-3", name: "Candidate 3", position: "Prime Minister", className: "10", image: fallbackImage, votes: 0 },
-      { id: "pm-4", name: "Candidate 4", position: "Prime Minister", className: "10", image: fallbackImage, votes: 0 },
+      { id: "pm-1", name: "Mohammad Sadiq", position: "Prime Minister", className: "9", image: "public-images/Sadiq.png", votes: 0 },
+      { id: "pm-2", name: "Shifa Mohd", position: "Prime Minister", className: "9", image: "public-images/Shifa.png", votes: 0 },
+      { id: "pm-3", name: "Ayana", position: "Prime Minister", className: "8", image: "public-images/Ayana.png", votes: 0 },
 
-      // 2. Environmental Affairs
-      { id: "env-1", name: "Saliha", position: "Environmental Affairs", className: "8", image: fallbackImage, votes: 0 },
-      { id: "env-2", name: "Candidate 6", position: "Environmental Affairs", className: "7", image: fallbackImage, votes: 0 },
-      { id: "env-3", name: "Candidate 7", position: "Environmental Affairs", className: "8", image: fallbackImage, votes: 0 },
-      { id: "env-4", name: "Candidate 8", position: "Environmental Affairs", className: "9", image: fallbackImage, votes: 0 },
+      // 2. Deputy Prime Minister
+      { id: "dpm-1", name: "Ayan Ameen", position: "Deputy Prime Minister", className: "7", image: "public-images/Ayan.png", votes: 0 },
+      { id: "dpm-2", name: "Mahira Khan", position: "Deputy Prime Minister", className: "8", image: "public-images/Mahira.png", votes: 0 },
+      { id: "dpm-3", name: "Nadiya", position: "Deputy Prime Minister", className: "9", image: "public-images/Nadiya.png", votes: 0 },
 
-      // 3. Fine Arts & Cultural Affairs
-      { id: "fa-1", name: "Zaira Khan", position: "Fine Arts & Cultural Affairs", className: "10", image: fallbackImage, votes: 0 },
-      { id: "fa-2", name: "Ziya", position: "Fine Arts & Cultural Affairs", className: "9", image: fallbackImage, votes: 0 },
-      { id: "fa-3", name: "Candidate 11", position: "Fine Arts & Cultural Affairs", className: "8", image: fallbackImage, votes: 0 },
-      { id: "fa-4", name: "Candidate 12", position: "Fine Arts & Cultural Affairs", className: "10", image: fallbackImage, votes: 0 },
+      // 3. Speaker
+      { id: "spk-1", name: "Alina Ahmed", position: "Speaker", className: "8", image: "public-images/Alina.png", votes: 0 },
+      { id: "spk-2", name: "Muhammad Rayyan", position: "Speaker", className: "9", image: "public-images/Rayyan.png", votes: 0 },
+      { id: "spk-3", name: "Iram Ronak", position: "Speaker", className: "8", image: "public-images/Iram.png", votes: 0 },
+      { id: "spk-4", name: "Muhammad Aqdas", position: "Speaker", className: "7", image: "public-images/Aqdas.png", votes: 0 },
+      { id: "spk-5", name: "Fatima Jahan", position: "Speaker", className: "7", image: "public-images/Fathima.png", votes: 0 },
 
-      // 4. Head Student
-      { id: "hs-1", name: "Candidate 13", position: "Head Student", className: "10 A", image: fallbackImage, votes: 0 },
-      { id: "hs-2", name: "Candidate 14", position: "Head Student", className: "10 B", image: fallbackImage, votes: 0 },
-      { id: "hs-3", name: "Candidate 15", position: "Head Student", className: "10 C", image: fallbackImage, votes: 0 },
-      { id: "hs-4", name: "Candidate 16", position: "Head Student", className: "10 D", image: fallbackImage, votes: 0 },
+      // 4. Discipline Affairs
+      { id: "disc-1", name: "Malala Niyamat", position: "Discipline Affairs", className: "8", image: "public-images/Malala.png", votes: 0 },
+      { id: "disc-2", name: "Yasmeen Khan", position: "Discipline Affairs", className: "7", image: "public-images/Yasmeen.png", votes: 0 },
 
-      // 5. General Captain
-      { id: "gc-1", name: "Candidate 17", position: "General Captain", className: "10", image: fallbackImage, votes: 0 },
-      { id: "gc-2", name: "Candidate 18", position: "General Captain", className: "9", image: fallbackImage, votes: 0 },
-      { id: "gc-3", name: "Candidate 19", position: "General Captain", className: "10", image: fallbackImage, votes: 0 },
-      { id: "gc-4", name: "Candidate 20", position: "General Captain", className: "9", image: fallbackImage, votes: 0 },
+      // 5. Sports Affairs
+      { id: "sprt-1", name: "Naved Khan", position: "Sports Affairs", className: "6", image: "public-images/Naved.png", votes: 0 },
+      { id: "sprt-2", name: "Shaban Ali", position: "Sports Affairs", className: "5", image: "public-images/Shaban.png", votes: 0 },
+      { id: "sprt-3", name: "Diyan Rahman", position: "Sports Affairs", className: "8", image: "public-images/Diyan.png", votes: 0 },
+      { id: "sprt-4", name: "Mohammad Shayaaw Alam Khan", position: "Sports Affairs", className: "5", image: "public-images/Shayan.png", votes: 0 },
+      { id: "sprt-5", name: "Adeeba Rahees", position: "Sports Affairs", className: "5", image: "public-images/Adeeba.png", votes: 0 },
+      { id: "sprt-6", name: "Mohd Zishan", position: "Sports Affairs", className: "5", image: "public-images/Zishan.png", votes: 0 },
 
-      // 6. Food & Health
-      { id: "fh-1", name: "Candidate 21", position: "Food & Health", className: "9", image: fallbackImage, votes: 0 },
-      { id: "fh-2", name: "Candidate 22", position: "Food & Health", className: "8", image: fallbackImage, votes: 0 },
-      { id: "fh-3", name: "Candidate 23", position: "Food & Health", className: "9", image: fallbackImage, votes: 0 },
-      { id: "fh-4", name: "Candidate 24", position: "Food & Health", className: "7", image: fallbackImage, votes: 0 },
+      // 6. Student Welfare
+      { id: "welf-1", name: "Atika Khan", position: "Student Welfare", className: "3", image: "public-images/Atika.png", votes: 0 },
+      { id: "welf-2", name: "Kasifa Khan", position: "Student Welfare", className: "6", image: "public-images/Kasifa.png", votes: 0 },
+      { id: "welf-3", name: "Samar Sarfarya", position: "Student Welfare", className: "7", image: "public-images/Samar.png", votes: 0 },
 
-      // 7. Student Editor
-      { id: "se-1", name: "Candidate 25", position: "Student Editor", className: "10", image: fallbackImage, votes: 0 },
-      { id: "se-2", name: "Candidate 26", position: "Student Editor", className: "9", image: fallbackImage, votes: 0 },
-      { id: "se-3", name: "Candidate 27", position: "Student Editor", className: "10", image: fallbackImage, votes: 0 },
-      { id: "se-4", name: "Candidate 28", position: "Student Editor", className: "8", image: fallbackImage, votes: 0 },
+      // 7. Fine Arts & Cultural
+      { id: "art-1", name: "Zaira Khan", position: "Fine Arts & Cultural", className: "6", image: "public-images/Zaira.png", votes: 0 },
+      { id: "art-2", name: "Akiba Javed", position: "Fine Arts & Cultural", className: "8", image: "public-images/Akiba.png", votes: 0 },
+      { id: "art-3", name: "Mohd Rihan", position: "Fine Arts & Cultural", className: "7", image: "public-images/Rihan.png", votes: 0 },
 
-      // 8. Discipline & Welfare
-      { id: "dw-1", name: "Candidate 29", position: "Discipline & Welfare", className: "10", image: fallbackImage, votes: 0 },
-      { id: "dw-2", name: "Candidate 30", position: "Discipline & Welfare", className: "9", image: fallbackImage, votes: 0 },
-      { id: "dw-3", name: "Candidate 31", position: "Discipline & Welfare", className: "10", image: fallbackImage, votes: 0 },
-      { id: "dw-4", name: "Candidate 32", position: "Discipline & Welfare", className: "9", image: fallbackImage, votes: 0 },
+      // 8. Environmental Affairs
+      { id: "env-1", name: "Saliha", position: "Environmental Affairs", className: "5", image: "public-images/Saliha.png", votes: 0 },
+      { id: "env-2", name: "Ziya Khan", position: "Environmental Affairs", className: "5", image: "public-images/Ziya.png", votes: 0 },
+      { id: "env-3", name: "Sadikha Khan", position: "Environmental Affairs", className: "5", image: "public-images/Sadikha.png", votes: 0 },
+      { id: "env-4", name: "Aaliya Ahmad", position: "Environmental Affairs", className: "5", image: "public-images/Aaliyaa.png", votes: 0 },
+      { id: "env-5", name: "Farheen Khan", position: "Environmental Affairs", className: "3", image: "public-images/Farheen.png", votes: 0 },
+      { id: "env-6", name: "Iffat Zohra", position: "Environmental Affairs", className: "3", image: "public-images/Iffath.png", votes: 0 },
 
-      // 9. IT & Media Coordinator
-      { id: "it-1", name: "Candidate 33", position: "IT & Media Coordinator", className: "10", image: fallbackImage, votes: 0 },
-      { id: "it-2", name: "Candidate 34", position: "IT & Media Coordinator", className: "9", image: fallbackImage, votes: 0 },
-      { id: "it-3", name: "Candidate 35", position: "IT & Media Coordinator", className: "10", image: fallbackImage, votes: 0 },
+      // 9. Health & Hygiene
+      { id: "hlth-1", name: "Mohd Anas", position: "Health & Hygiene", className: "5", image: "public-images/Anas.png", votes: 0 },
+      { id: "hlth-2", name: "Sara", position: "Health & Hygiene", className: "6", image: "public-images/Sara.png", votes: 0 },
+      { id: "hlth-3", name: "Aaliya", position: "Health & Hygiene", className: "7", image: "public-images/Aliya.png", votes: 0 },
 
-      // 10. Science & Innovation
-      { id: "si-1", name: "Candidate 36", position: "Science & Innovation", className: "9", image: fallbackImage, votes: 0 },
-      { id: "si-2", name: "Candidate 37", position: "Science & Innovation", className: "8", image: fallbackImage, votes: 0 },
-      { id: "si-3", name: "Candidate 38", position: "Science & Innovation", className: "9", image: fallbackImage, votes: 0 },
+      // 10. Media & Communications
+      { id: "med-1", name: "Nuraiz Irfan", position: "Media & Communications", className: "6", image: "public-images/Nuraiz.png", votes: 0 },
+      { id: "med-2", name: "Arfan", position: "Media & Communications", className: "7", image: "public-images/Arfan.png", votes: 0 },
+      { id: "med-3", name: "Shifa Khan", position: "Media & Communications", className: "9", image: "public-images/Shifakhan.png", votes: 0 },
 
-      // 11. Moral & Social Service
-      { id: "ms-1", name: "Candidate 39", position: "Moral & Social Service", className: "10", image: fallbackImage, votes: 0 },
-      { id: "ms-2", name: "Candidate 40", position: "Moral & Social Service", className: "9", image: fallbackImage, votes: 0 },
-      { id: "ms-3", name: "Mohd Rihan", position: "Moral & Social Service", className: "7", image: fallbackImage, votes: 0 }
+      // 11. Academic Affairs
+      { id: "acad-1", name: "Mohd Abdullah", position: "Academic Affairs", className: "7", image: "public-images/Abdulla.png", votes: 0 },
+      { id: "acad-2", name: "Aaliya Khan", position: "Academic Affairs", className: "6", image: "public-images/Aaliya.png", votes: 0 },
+      { id: "acad-3", name: "Anjeeda Khan", position: "Academic Affairs", className: "5", image: "public-images/Anjeela.png", votes: 0 },
+      { id: "acad-4", name: "Warda Khan", position: "Academic Affairs", className: "5", image: "public-images/Warda.png", votes: 0 }
     ]
   };
 }
@@ -108,7 +101,7 @@ function saveLocalData(data) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
-async function requestData(path = "/election", options = {}) {
+async function requestData(path = "/api/election", options = {}) {
   if (!API_BASE) return null;
   const response = await fetch(`${API_BASE}${path}`, {
     headers: { "Content-Type": "application/json" },
@@ -121,7 +114,6 @@ async function requestData(path = "/election", options = {}) {
 async function loadData() {
   try {
     let data = await requestData();
-    // SELF-HEAL: If server is empty or missing roster arrays, inject the full 41-candidate master blueprint
     if (!data || !data.candidates || data.candidates.length <= 1) {
       data = defaultData();
       await saveData(data);
@@ -138,14 +130,14 @@ async function saveData(data) {
     return data;
   }
   try {
-    const saved = await requestData("/election", {
+    const saved = await requestData("/api/election", {
       method: "PUT",
       body: JSON.stringify(data)
     });
     saveLocalData(saved);
     return saved;
   } catch {
-    throw new Error("Could not save election data");
+    throw new Error("Could not save data");
   }
 }
 
@@ -175,28 +167,10 @@ function percentNumber(votes, total) {
 }
 
 function candidateImage(candidate) {
-  if (candidate && candidate.image && candidate.image.startsWith("data:")) {
+  if (candidate && candidate.image && candidate.image.trim() !== "") {
     return candidate.image;
   }
-  return initialsAvatar(candidate?.name || "Candidate");
-}
-
-function initialsAvatar(name) {
-  const initials = String(name || "Candidate")
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase() || "")
-    .join("") || "C";
-  const hue = Array.from(String(name || "Candidate")).reduce((sum, char) => sum + char.charCodeAt(0), 0) % 360;
-  return (
-    "data:image/svg+xml;charset=UTF-8," +
-    encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <rect width="160" height="160" rx="18" fill="hsl(${hue}, 42%, 34%)"/>
-        <text x="80" y="94" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="white">${initials}</text>
-      </svg>`)
-  );
+  return fallbackImage;
 }
 
 function updatePollBadges(isOpen) {
@@ -250,6 +224,7 @@ async function initPublicPage() {
       input.value = candidate.id;
       input.disabled = !data.pollOpen;
       card.querySelector("img").src = candidateImage(candidate);
+      card.querySelector("img").onerror = function() { this.src = fallbackImage; };
       card.querySelector("img").alt = `${candidate.name} photo`;
       card.querySelector("strong").textContent = candidate.name;
       card.querySelector("small").textContent = `Class ${candidate.className}`;
@@ -475,7 +450,7 @@ function renderAdminPage(data) {
           <div style="position: absolute; top: 14px; left: 14px; width: 34px; height: 34px; background: ${badgeBg}; color: white; font-weight: 800; font-size: 0.95rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">${rank}</div>
           ${isLeading ? `<div style="position: absolute; top: -12px; background: #3b82f6; color: #ffffff; font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 9999px;">👑 Winning Leader</div>` : ''}
           <div style="width: 115px; height: 115px; border-radius: 50%; overflow: hidden; margin-top: 8px; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: center; background: #f8fafc;">
-            <img src="${candidateImage(candidate)}" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="${candidateImage(candidate)}" onerror="this.src='${fallbackImage}'" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
           <h4 style="font-size: 1.3rem; font-weight: 700; color: #1e293b; margin: 0;">${escapeHtml(candidate.name)}</h4>
           <p style="font-size: 0.85rem; color: #64748b; font-weight: 600; margin: 4px 0 1.5rem 0;">Class ${escapeHtml(candidate.className || 'N/A')}</p>
@@ -605,6 +580,32 @@ function initAdminPage() {
   const candidateForm = document.getElementById("candidateForm");
   const candidateFormStatus = document.getElementById("candidateFormStatus");
 
+  const tabShowResults = document.getElementById("tabShowResults");
+  const tabShowManage = document.getElementById("tabShowManage");
+  const resultsTabWrapper = document.getElementById("resultsTabWrapper");
+  const manageTabWrapper = document.getElementById("manageTabWrapper");
+
+  if (tabShowResults && tabShowManage) {
+    tabShowResults.addEventListener("click", () => {
+      resultsTabWrapper.style.display = "block";
+      manageTabWrapper.style.display = "none";
+      tabShowResults.style.background = "#3b82f6";
+      tabShowResults.style.color = "#ffffff";
+      tabShowManage.style.background = "transparent";
+      tabShowManage.style.color = "#475569";
+      renderAdmin();
+    });
+
+    tabShowManage.addEventListener("click", () => {
+      resultsTabWrapper.style.display = "none";
+      manageTabWrapper.style.display = "block";
+      tabShowManage.style.background = "#3b82f6";
+      tabShowManage.style.color = "#ffffff";
+      tabShowResults.style.background = "transparent";
+      tabShowResults.style.color = "#475569";
+    });
+  }
+
   if (sessionStorage.getItem(SESSION_KEY) === "true") {
     loginView.classList.add("hidden");
     adminView.classList.remove("hidden");
@@ -670,7 +671,7 @@ function initAdminPage() {
 
   setInterval(() => {
     if (adminView && !adminView.classList.contains("hidden")) {
-      fetch(`${API_BASE}/election`).then(r => r.json()).then(d => renderAdminPage(d));
+      fetch(`${API_BASE}/api/election`).then(r => r.json()).then(d => renderAdminPage(d));
     }
   }, 4000);
 }
@@ -679,6 +680,9 @@ async function editCandidate(id) {
   const data = await loadData();
   const c = data.candidates.find(item => item.id === id);
   if (!c) return;
+  
+  document.getElementById("tabShowManage").click();
+  
   document.getElementById("candidateId").value = c.id;
   document.getElementById("candidateName").value = c.name;
   document.getElementById("candidatePosition").value = c.position;
