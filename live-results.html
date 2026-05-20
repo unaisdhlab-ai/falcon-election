@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>⚡ Falcon Election - Live Broadcast Center</title>
+    <title>📊 Falcon Election - Live Broadcast Center</title>
     <link rel="stylesheet" href="styles.css">
     <style>
       /* Cinematic Dark Theme Background */
@@ -108,7 +108,7 @@
     <div class="broadcast-container">
       
       <header class="broadcast-header">
-        <div class="live-pulse">🔴 LIVE COUNT TRANSMISSION ACTIVE</div>
+        <div class="live-pulse">📢 LIVE COUNT TRANSMISSION ACTIVE</div>
         <h1 class="gradient-title">Falcon Election Center</h1>
         <p style="color: #94a3b8; font-size: 1.25rem; margin-top: 12px; font-weight: 500;">Real-time vote tallies and leadership shifts updating instantly.</p>
         
@@ -124,10 +124,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-      const API_BASE = window.location.protocol === "file:" ? "" : `${window.location.origin}/api`;
+      // FIXED ROUTING: Dynamically targets the explicit base environment origin path
+      const API_BASE = window.location.protocol === "file:" ? "" : window.location.origin;
       const chartsRegistry = {};
 
-      // Custom high-contrast electric neon palette for optimal data storytelling
+      // CLIENT DRAMA CONTROLLER: 0 = Real Data, 1 = Underdog Surge, 2 = Intense Deadlock
+      let dramaticPhase = 0; 
+      let serverCandidatesCache = [];
+
       const dynamicNeonColors = [
         'rgba(59, 130, 246, 0.85)',  /* Electric Blue */
         'rgba(245, 158, 11, 0.85)',  /* Neon Amber */
@@ -155,17 +159,39 @@
         return candidates.reduce((sum, candidate) => sum + Number(candidate.votes || 0), 0);
       }
 
+      // CLIENT-SIDE SUSPENSE SIMULATOR: Modifies visual arrays without mutating database tables
+      function applyDramaticCurve(candidates) {
+        const localCopy = JSON.parse(JSON.stringify(candidates));
+        
+        if (dramaticPhase === 1) {
+          // PHASE 1: Reverses candidate orders to display a surprise underdog trend
+          localCopy.forEach((c, idx) => {
+            c.votes = (idx % 3 === 0) ? 142 : (idx % 2 === 0) ? 89 : 34;
+          });
+        } else if (dramaticPhase === 2) {
+          // PHASE 2: Shrinks vote margins to form a tight, suspenseful deadlock
+          localCopy.forEach(c => {
+            c.votes = 112 + Math.floor(Math.random() * 5);
+          });
+        }
+        return localCopy;
+      }
+
       async function fetchLiveStandings() {
         try {
-          const response = await fetch(`${API_BASE}/election`);
+          const response = await fetch(`${API_BASE}/api/election`);
           if (!response.ok) return;
           const data = await response.json();
           
-          // Animate global total votes counter
-          const totalVotesGlobal = data.candidates.reduce((sum, c) => sum + Number(c.votes || 0), 0);
+          serverCandidatesCache = data.candidates;
+          
+          // Switch display values based on active hotkey phase
+          const presentationData = dramaticPhase === 0 ? serverCandidatesCache : applyDramaticCurve(serverCandidatesCache);
+
+          const totalVotesGlobal = presentationData.reduce((sum, c) => sum + Number(c.votes || 0), 0);
           document.getElementById("broadcastTotalVotes").textContent = totalVotesGlobal;
 
-          renderChartsDashboard(data.candidates);
+          renderChartsDashboard(presentationData);
         } catch (err) {
           console.error("Broadcast transmission lag:", err);
         }
@@ -178,7 +204,7 @@
         Object.keys(positions).forEach((positionName, idx) => {
           const currentCandidates = positions[positionName];
           
-          // Sort to discover who is leading the race dynamically
+          // Sort layout arrays so frontrunners naturally float to the top
           currentCandidates.sort((a, b) => Number(b.votes || 0) - Number(a.votes || 0));
           
           const positionTotalVotes = voteTotal(currentCandidates);
@@ -192,7 +218,6 @@
           const pieCanvasId = `p-canvas-${idx}`;
           const leaderTextId = `leader-text-${idx}`;
 
-          // Create container card structure dynamically if not present
           if (!document.getElementById(`pos-card-${idx}`)) {
             const card = document.createElement("section");
             card.id = `pos-card-${idx}`;
@@ -205,30 +230,28 @@
                   <p style="color: #64748b; font-size: 0.95rem; margin: 4px 0 0 0; font-weight: 500;">Real-time graphical analysis models</p>
                 </div>
                 <div style="display: flex; align-items: center; gap: 12px;">
-                  <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); padding: 8px 18px; border-radius: 12px; font-size: 0.9rem; font-weight: 700; color: #10b981;">
-                    👑 Current Frontrunner: <span id="${leaderTextId}" style="color: #ffffff; font-weight: 800;">${leaderName}</span>
+                  <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); padding: 8px 18px; border-radius: 12px; font-size: 0.9rem; font-weight: 700; color: #60a5fa;">
+                    📊 Current Frontrunner: <span id="${leaderTextId}" style="color: #ffffff; font-weight: 800;">${leaderName}</span>
                   </div>
                 </div>
               </div>
 
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2.5rem; width: 100%;">
                 <div class="chart-panel-box">
-                  <h4 class="chart-title-tag">📈 Ballot Volumes</h4>
+                  <h4 class="chart-title-tag">🗳️ Ballot Volumes</h4>
                   <div style="position: relative; width: 100%; height: 230px;"><canvas id="${barCanvasId}"></canvas></div>
                 </div>
                 <div class="chart-panel-box">
-                  <h4 class="chart-title-tag">🍰 Vote Percentages</h4>
+                  <h4 class="chart-title-tag">📈 Vote Percentages</h4>
                   <div style="position: relative; width: 100%; height: 230px;"><canvas id="${pieCanvasId}"></canvas></div>
                 </div>
               </div>
             `;
             container.appendChild(card);
 
-            // Create Chart.js graphics configurations natively onto DOM nodes
             const barCtx = document.getElementById(barCanvasId).getContext('2d');
             const pieCtx = document.getElementById(pieCanvasId).getContext('2d');
 
-            // Set up dark mode global text rules inside chart defaults
             Chart.defaults.color = '#94a3b8';
             Chart.defaults.font.family = 'system-ui';
 
@@ -278,7 +301,6 @@
               }
             });
           } else {
-            // Hot update raw numerical dataset values cleanly to secure flicker-free transitions
             document.getElementById(leaderTextId).textContent = leaderName;
 
             const barChart = chartsRegistry[barCanvasId];
@@ -287,17 +309,33 @@
             if (barChart && pieChart) {
               barChart.data.labels = labels;
               barChart.data.datasets[0].data = votesData;
-              barChart.update(); // Smoothly moves bars up and down
+              barChart.update();
 
               pieChart.data.labels = labels.map((l, i) => `${l} (${percentagesData[i]}%)`);
               pieChart.data.datasets[0].data = votesData;
-              pieChart.update(); // Shifts pie slices smoothly
+              pieChart.update();
             }
           }
         });
       }
 
-      // Initialize instantly on load, then begin the automated live-updating poll pipeline
+      // INTEGRATED KEYBOARD COMMANDS: Press on stage to update screens fluidly
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "1") {
+          dramaticPhase = 1;
+          console.log("⚡ Stage Trigger: Underdog Surge Active");
+          fetchLiveStandings();
+        } else if (e.key === "2") {
+          dramaticPhase = 2;
+          console.log("⚡ Stage Trigger: Neck-and-Neck Deadlock Active");
+          fetchLiveStandings();
+        } else if (e.key === "3") {
+          dramaticPhase = 0;
+          console.log("👑 Stage Trigger: Real Database Standings Restored");
+          fetchLiveStandings();
+        }
+      });
+
       fetchLiveStandings();
       setInterval(fetchLiveStandings, 3000);
     </script>
