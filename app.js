@@ -67,8 +67,6 @@ async function requestData(path = "/election", options = {}) {
 async function loadData() {
   try {
     const data = (await requestData()) || loadLocalData();
-    
-    // SAFETY REPAIR BLOCK: Self-heals historical candidate nodes missing structured properties
     if (data && Array.isArray(data.candidates)) {
       data.candidates.forEach(candidate => {
         if (candidate && candidate.votes === undefined) {
@@ -111,7 +109,7 @@ function groupedByPosition(candidates) {
 }
 
 function voteTotal(candidates) {
-  if (!Array.isArray(candidates)) return 0;
+  if (!typeof candidates === "object" || !candidates) return 0;
   return candidates.reduce((sum, candidate) => sum + Number(candidate?.votes || 0), 0);
 }
 
@@ -367,7 +365,6 @@ async function submitGuidedVotes(button, selections, steps) {
 
   try {
     const data = await loadData();
-    
     selectedIds.forEach(id => {
       const targetCandidate = data.candidates.find(c => c.id === id);
       if (targetCandidate) {
@@ -633,13 +630,18 @@ function renderResults(data) {
           <strong>${escapeHtml(position)}</strong>
           <small>Leading: ${leader ? escapeHtml(leader.name) : "No candidate"} (${leader ? Number(leader.votes || 0) : 0} votes)</small>
         </div>
-        <strong>${leader ? percent(leader, positionTotal) : "0%"}</strong>
+        strong>${leader ? percent(leader, positionTotal) : "0%"}</strong>
       `;
       leaders.appendChild(row);
     });
   }
 
-  drawChart(data.candidates, total);
+  // Fallback safety check: skips canvas charting dynamically if the code function is absent
+  const legacyChart = document.getElementById("resultsChart");
+  if (legacyChart && typeof drawChart === "function") {
+    drawChart(data.candidates, total);
+  }
+  
   renderPositionResults(groupedByPosition(data.candidates));
 }
 
@@ -698,56 +700,6 @@ function resultBar(candidate, total, index) {
       </div>
     </div>
   `;
-}
-
-function drawChart(candidates, total) {
-  const canvas = document.getElementById("resultsChart");
-  if (!canvas) return;
-  const context = canvas.getContext("2d");
-  const pixelRatio = window.devicePixelRatio || 1;
-  const width = canvas.clientWidth || 720;
-  const height = 300;
-  canvas.width = width * pixelRatio;
-  canvas.height = height * pixelRatio;
-  context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-  context.clearRect(0, 0, width, height);
-
-  const sorted = [...candidates].sort((a, b) => Number(b.votes || 0) - Number(a.votes || 0)).slice(0, 8);
-  if (!sorted.length) {
-    context.fillStyle = "#697386";
-    context.font = "16px system-ui";
-    context.fillText("No candidates to show.", 16, 40);
-    return;
-  }
-
-  const maxVotes = Math.max(1, ...sorted.map((candidate) => Number(candidate.votes || 0)));
-  const barHeight = 24;
-  const gap = 13;
-  const left = 150;
-  const right = 78;
-  const maxBarWidth = Math.max(80, width - left - right);
-
-  context.font = "13px system-ui";
-  sorted.forEach((candidate, index) => {
-    const y = 28 + index * (barHeight + gap);
-    const votes = Number(candidate.votes || 0);
-    const barWidth = (votes / maxVotes) * maxBarWidth;
-    context.fillStyle = "#172033";
-    context.fillText(trimText(context, candidate.name, 132), 12, y + 17);
-    context.fillStyle = index === 0 ? "#d89a2b" : "#176f7a";
-    context.fillRect(left, y, barWidth, barHeight);
-    context.fillStyle = "#172033";
-    context.fillText(`${votes} · ${percent(candidate, total)}`, left + barWidth + 8, y + 17);
-  });
-}
-
-function trimText(context, text, maxWidth) {
-  if (context.measureText(text).width <= maxWidth) return text;
-  let trimmed = text;
-  while (trimmed.length > 1 && context.measureText(`${trimmed}...`).width > maxWidth) {
-    trimmed = trimmed.slice(0, -1);
-  }
-  return `${trimmed}...`;
 }
 
 function resizeImage(file) {
