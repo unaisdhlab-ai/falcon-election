@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>⚡ Falcon Election - Live Broadcast Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      /* Cinematic Dark Theme Background */
+      body { 
+        background: radial-gradient(circle at top, #0f172a 0%, #020617 100%); 
+        color: #f8fafc;
+        font-family: system-ui, -apple-system, sans-serif;
+        padding-top: 3rem; 
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      
+      .broadcast-container { 
+        width: 95%; 
+        max-width: 1500px; 
+        margin: 0 auto; 
+        padding-bottom: 6rem; 
+      }
+
+      /* Premium Glossy Header Box */
+      .broadcast-header { 
+        text-align: center; 
+        margin-bottom: 4rem; 
+        background: rgba(15, 23, 42, 0.6); 
+        padding: 3rem 2rem; 
+        border-radius: 24px; 
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+        position: relative;
+      }
+
+      /* Glowing Live Ticker Badge */
+      .live-pulse { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        background: #ef4444; 
+        color: white; 
+        padding: 8px 20px; 
+        border-radius: 9999px; 
+        font-weight: 800; 
+        font-size: 0.85rem; 
+        text-transform: uppercase; 
+        letter-spacing: 0.08em; 
+        margin-bottom: 1.5rem; 
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+        animation: pulse 1.5s infinite; 
+      }
+      @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.97); } 100% { opacity: 1; transform: scale(1); } }
+
+      /* Neon Gradient Text */
+      .gradient-title {
+        font-size: 3.5rem; 
+        font-weight: 900; 
+        margin: 0; 
+        letter-spacing: -0.03em;
+        background: linear-gradient(135deg, #ffffff 30%, #93c5fd 70%, #3b82f6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Dynamic Position Card Wrapper */
+      .position-section-card {
+        background: rgba(30, 41, 59, 0.4);
+        border-radius: 24px;
+        padding: 3rem;
+        margin-bottom: 3.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        animation: fadeInUp 0.6s ease-out;
+      }
+      @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+      /* Suspenseful Chart Box Panel */
+      .chart-panel-box {
+        background: rgba(15, 23, 42, 0.8); 
+        padding: 2rem; 
+        border-radius: 18px; 
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        box-shadow: inset 0 2px 4px rgba(255,255,255,0.02);
+        height: 320px; 
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .chart-title-tag {
+        margin: 0 0 1.5rem 0; 
+        color: #94a3b8; 
+        font-size: 1rem; 
+        font-weight: 700; 
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="broadcast-container">
+      
+      <header class="broadcast-header">
+        <div class="live-pulse">🔴 LIVE COUNT TRANSMISSION ACTIVE</div>
+        <h1 class="gradient-title">Falcon Election Center</h1>
+        <p style="color: #94a3b8; font-size: 1.25rem; margin-top: 12px; font-weight: 500;">Real-time vote tallies and leadership shifts updating instantly.</p>
+        
+        <div style="margin-top: 2rem; display: inline-flex; align-items: center; background: rgba(59, 130, 246, 0.1); padding: 12px 32px; border-radius: 16px; border: 1px solid rgba(59, 130, 246, 0.2);">
+          <span style="font-size: 1.2rem; font-weight: 700; color: #60a5fa; margin-right: 12px;">📊 TOTAL BALLOTS SECURED:</span>
+          <strong id="broadcastTotalVotes" style="font-size: 2rem; font-weight: 900; color: #ffffff; text-shadow: 0 0 15px rgba(59,130,246,0.6);">0</strong>
+        </div>
+      </header>
+
+      <main id="broadcastChartsContainer" style="display: grid; grid-template-columns: 1fr; gap: 3.5rem;"></main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const API_BASE = window.location.protocol === "file:" ? "" : `${window.location.origin}/api`;
+      const chartsRegistry = {};
+
+      // Custom high-contrast electric neon palette for optimal data storytelling
+      const dynamicNeonColors = [
+        'rgba(59, 130, 246, 0.85)',  /* Electric Blue */
+        'rgba(245, 158, 11, 0.85)',  /* Neon Amber */
+        'rgba(16, 185, 129, 0.85)',  /* Cyber Emerald */
+        'rgba(236, 72, 153, 0.85)',  /* Laser Pink */
+        'rgba(139, 92, 246, 0.85)',  /* Deep Violet */
+        'rgba(20, 184, 166, 0.85)',  /* Vivid Turquoise */
+        'rgba(244, 63, 94, 0.85)'    /* Crimson Flame */
+      ];
+
+      const dynamicBorderColors = [
+        '#3b82f6', '#f59e0b', '#10b981', '#ec4899', '#8b5cf6', '#14b8a6', '#f43f5e'
+      ];
+
+      function groupedByPosition(candidates) {
+        return candidates.reduce((groups, candidate) => {
+          const position = candidate.position.trim() || "Unassigned";
+          groups[position] = groups[position] || [];
+          groups[position].push(candidate);
+          return groups;
+        }, {});
+      }
+
+      function voteTotal(candidates) {
+        return candidates.reduce((sum, candidate) => sum + Number(candidate.votes || 0), 0);
+      }
+
+      async function fetchLiveStandings() {
+        try {
+          const response = await fetch(`${API_BASE}/election`);
+          if (!response.ok) return;
+          const data = await response.json();
+          
+          // Animate global total votes counter
+          const totalVotesGlobal = data.candidates.reduce((sum, c) => sum + Number(c.votes || 0), 0);
+          document.getElementById("broadcastTotalVotes").textContent = totalVotesGlobal;
+
+          renderChartsDashboard(data.candidates);
+        } catch (err) {
+          console.error("Broadcast transmission lag:", err);
+        }
+      }
+
+      function renderChartsDashboard(candidates) {
+        const container = document.getElementById("broadcastChartsContainer");
+        const positions = groupedByPosition(candidates);
+
+        Object.keys(positions).forEach((positionName, idx) => {
+          const currentCandidates = positions[positionName];
+          
+          // Sort to discover who is leading the race dynamically
+          currentCandidates.sort((a, b) => Number(b.votes || 0) - Number(a.votes || 0));
+          
+          const positionTotalVotes = voteTotal(currentCandidates);
+          const leaderName = currentCandidates[0]?.votes > 0 ? currentCandidates[0].name : "Tallying...";
+
+          const labels = currentCandidates.map(c => c.name);
+          const votesData = currentCandidates.map(c => Number(c.votes || 0));
+          const percentagesData = currentCandidates.map(c => positionTotalVotes ? Math.round((Number(c.votes || 0) / positionTotalVotes) * 100) : 0);
+
+          const barCanvasId = `b-canvas-${idx}`;
+          const pieCanvasId = `p-canvas-${idx}`;
+          const leaderTextId = `leader-text-${idx}`;
+
+          // Create container card structure dynamically if not present
+          if (!document.getElementById(`pos-card-${idx}`)) {
+            const card = document.createElement("section");
+            card.id = `pos-card-${idx}`;
+            card.className = "position-section-card";
+            
+            card.innerHTML = `
+              <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1.25rem; margin-bottom: 2.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                <div>
+                  <h2 style="font-size: 2.25rem; font-weight: 900; color: #ffffff; margin: 0; letter-spacing: -0.02em;">${positionName}</h2>
+                  <p style="color: #64748b; font-size: 0.95rem; margin: 4px 0 0 0; font-weight: 500;">Real-time graphical analysis models</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); padding: 8px 18px; border-radius: 12px; font-size: 0.9rem; font-weight: 700; color: #10b981;">
+                    👑 Current Frontrunner: <span id="${leaderTextId}" style="color: #ffffff; font-weight: 800;">${leaderName}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2.5rem; width: 100%;">
+                <div class="chart-panel-box">
+                  <h4 class="chart-title-tag">📈 Ballot Volumes</h4>
+                  <div style="position: relative; width: 100%; height: 230px;"><canvas id="${barCanvasId}"></canvas></div>
+                </div>
+                <div class="chart-panel-box">
+                  <h4 class="chart-title-tag">🍰 Vote Percentages</h4>
+                  <div style="position: relative; width: 100%; height: 230px;"><canvas id="${pieCanvasId}"></canvas></div>
+                </div>
+              </div>
+            `;
+            container.appendChild(card);
+
+            // Create Chart.js graphics configurations natively onto DOM nodes
+            const barCtx = document.getElementById(barCanvasId).getContext('2d');
+            const pieCtx = document.getElementById(pieCanvasId).getContext('2d');
+
+            // Set up dark mode global text rules inside chart defaults
+            Chart.defaults.color = '#94a3b8';
+            Chart.defaults.font.family = 'system-ui';
+
+            chartsRegistry[barCanvasId] = new Chart(barCtx, {
+              type: 'bar',
+              data: {
+                labels: labels,
+                datasets: [{ 
+                  data: votesData, 
+                  backgroundColor: dynamicNeonColors.slice(0, labels.length),
+                  borderColor: dynamicBorderColors.slice(0, labels.length),
+                  borderWidth: 1,
+                  borderRadius: 8
+                }]
+              },
+              options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { legend: { display: false } }, 
+                scales: { 
+                  y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { precision: 0, color: '#64748b' } },
+                  x: { grid: { display: false }, ticks: { font: { weight: 700 }, color: '#cbd5e1' } }
+                } 
+              }
+            });
+
+            chartsRegistry[pieCanvasId] = new Chart(pieCtx, {
+              type: 'pie',
+              data: {
+                labels: labels.map((l, i) => `${l} (${percentagesData[i]}%)`),
+                datasets: [{ 
+                  data: votesData, 
+                  backgroundColor: dynamicNeonColors.slice(0, labels.length), 
+                  borderColor: '#1e293b', 
+                  borderWidth: 3 
+                }]
+              },
+              options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { 
+                  legend: { 
+                    position: 'right', 
+                    labels: { boxWidth: 14, color: '#e2e8f0', font: { weight: 700, size: 12 } } 
+                  } 
+                } 
+              }
+            });
+          } else {
+            // Hot update raw numerical dataset values cleanly to secure flicker-free transitions
+            document.getElementById(leaderTextId).textContent = leaderName;
+
+            const barChart = chartsRegistry[barCanvasId];
+            const pieChart = chartsRegistry[pieCanvasId];
+
+            if (barChart && pieChart) {
+              barChart.data.labels = labels;
+              barChart.data.datasets[0].data = votesData;
+              barChart.update(); // Smoothly moves bars up and down
+
+              pieChart.data.labels = labels.map((l, i) => `${l} (${percentagesData[i]}%)`);
+              pieChart.data.datasets[0].data = votesData;
+              pieChart.update(); // Shifts pie slices smoothly
+            }
+          }
+        });
+      }
+
+      // Initialize instantly on load, then begin the automated live-updating poll pipeline
+      fetchLiveStandings();
+      setInterval(fetchLiveStandings, 3000);
+    </script>
+  </body>
+</html>
