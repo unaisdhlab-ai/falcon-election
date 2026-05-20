@@ -1,7 +1,7 @@
 {
   "pollOpen": false,
   "candidates": [
-    { "id": "pm-1", "name": "Mohammad Sadiq", "position": "Prime Minister", "className": "9", "image": "public-images/Sadiq.png", "votes": 103 },
+    { "id": "pm-1", "name": "Mohammad Sadiq", "position": "Prime Minister", "className": "9", "image": "public-images/Sadik.png", "votes": 103 },
     { "id": "pm-2", "name": "Shifa Mohd", "position": "Prime Minister", "className": "9", "image": "public-images/Ayana.png", "votes": 21 },
     { "id": "pm-3", "name": "Ayana", "position": "Prime Minister", "className": "8", "image": "public-images/Shifa.png", "votes": 47 },
 
