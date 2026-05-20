@@ -2,7 +2,7 @@ const STORAGE_KEY = "falconElectionData";
 const SESSION_KEY = "falconElectionAdminSignedIn";
 const ADMIN_USERNAME = "unaisbaraka";
 const ADMIN_PASSWORD = "falconelection26";
-const API_BASE = window.location.protocol === "file:" ? "" : `${window.location.origin}/api`;
+const API_BASE = window.location.protocol === "file:" ? "" : `${window.location.origin}`;
 
 const fallbackImage =
   "data:image/svg+xml;charset=UTF-8," +
@@ -54,7 +54,7 @@ function saveLocalData(data) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
-async function requestData(path = "/election", options = {}) {
+async function requestData(path = "/api/election", options = {}) {
   if (!API_BASE) return null;
   const response = await fetch(`${API_BASE}${path}`, {
     headers: { "Content-Type": "application/json" },
@@ -79,7 +79,7 @@ async function saveData(data) {
   }
 
   try {
-    const saved = await requestData("/election", {
+    const saved = await requestData("/api/election", {
       method: "PUT",
       body: JSON.stringify(data)
     });
@@ -304,79 +304,6 @@ function showVoteStep(stepNumber) {
     step.classList.toggle("hidden", Number(step.dataset.step) !== stepNumber);
   });
   window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function renderVoteReview(steps, candidates, selections) {
-  const reviewList = document.getElementById("voteReviewList");
-  if (!reviewList) return;
-  
-  reviewList.innerHTML = steps
-    .map(([position]) => {
-      const selected = candidates.find((candidate) => candidate.id === selections[position]);
-      const hasSelection = !!selected;
-      
-      return `
-        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: left;">
-          <div style="flex: 1; padding-right: 12px;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: #4f46e5; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 2px;">
-              ${escapeHtml(position)}
-            </span>
-            <strong style="font-size: 1.05rem; color: #0f172a; font-weight: 700; display: block;">
-              ${hasSelection ? escapeHtml(selected.name) : "No selection"}
-            </strong>
-            ${hasSelection && selected.className ? `
-              <span style="font-size: 0.8rem; color: #64748b; font-weight: 500; display: block; margin-top: 1px;">
-                Class ${escapeHtml(selected.className)}
-              </span>
-            ` : ''}
-          </div>
-          <div>
-            <span style="font-size: 0.8rem; background: ${hasSelection ? '#ecfdf5' : '#fef2f2'}; color: ${hasSelection ? '#065f46' : '#991b1b'}; padding: 6px 12px; border-radius: 9999px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; display: inline-block; white-space: nowrap;">
-              ${hasSelection ? '✓ Selected' : '✕ Missing'}
-            </span>
-          </div>
-        </div>
-      `;
-    })
-    .join("");
-}
-
-async function submitGuidedVotes(button, selections, steps) {
-  const error = document.querySelector("[data-submit-error]");
-  const selectedIds = steps.map(([position]) => selections[position]).filter(Boolean);
-  if (selectedIds.length !== steps.length) {
-    error.textContent = "Please complete every position before submitting.";
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = "Submitting...";
-  error.textContent = "";
-
-  try {
-    const response = await fetch(`${API_BASE}/vote-bulk`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ candidateIds: selectedIds })
-    });
-
-    if (!response.ok) throw new Error("Submission failed");
-
-    showSuccessModal();
-    
-    setTimeout(() => {
-      window.location.reload();
-    }, 5000);
-  } catch {
-    button.disabled = false;
-    button.textContent = "Submit votes";
-    error.textContent = "Votes could not be submitted. Please try again.";
-  }
-}
-
-function showSuccessModal() {
-  const modal = document.getElementById("successModal");
-  modal.classList.remove("hidden");
 }
 
 /* ==========================================================================
@@ -936,7 +863,7 @@ function initAdminPage() {
     if (!adminView || adminView.classList.contains("hidden")) return;
 
     try {
-      const response = await fetch(`${API_BASE}/election`);
+      const response = await fetch(`${API_BASE}/api/election`);
       if (!response.ok) return;
       const data = await response.json();
       renderAdminPage(data);
